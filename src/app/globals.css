@@ -1,21 +1,116 @@
+
+/* :root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+} */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/* Material Icons 및 Outlined 스타일을 @import로 추가 */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.admin-user-color {
+  max-width: 1920px;
+  background-color: #F6F2F2;
+}
+
+.admin-user p {
+  padding: 11px 19px;
+  display: inline-block;
+}
+
+.admin-user {
+  max-width: 1320px;
+  text-align: right;
+  font-size: 16px;
+  margin : 0 auto;
+}
+
+.admin-Header {
+  max-width: 1920px;
+  width: 100%
+}
+
+.menubar-color {
+  max-width: 1920px;
+  background-color: #FFF;
+  border-bottom: 2px solid #843ffe;
+}
+
+.menubar {
+  width: 1320px;
+
+  margin: 0 auto;
+}
+
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+font-weight: 600;
+padding : 22px 32px;
+font-size: 20px;
+display: inline-block;
+}
+
+/* 기존 스타일 유지 */
+
+/* 드롭다운 메뉴 */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+/* 드롭다운 항목 */
+.dropdown-item {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #522020;
+}
+
+/* 메뉴 옵션 */
+.menu-options {
+  position: relative; /* 드롭다운 메뉴 위치 조정을 위한 상대 위치 */
+  padding: 22px 32px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
 }

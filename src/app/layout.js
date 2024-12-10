@@ -1,6 +1,6 @@
 import '../app/globals.css'; // 전역 스타일 (필요시)
-import Adheader from './components/Adheader';
-import Adfooter from './components/Adfooter';
+import AdminHeader from './components/AdminHeader';
+import AdminFooter from './components/AdminFooter';
 
 export default function RootLayout({ children }) {
   return (
@@ -10,8 +10,9 @@ export default function RootLayout({ children }) {
       <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
       </head>
       <body>
-          <Adheader />
+          <AdminHeader />
           {children}
+          <AdminFooter />
       </body>
     </html>
   );

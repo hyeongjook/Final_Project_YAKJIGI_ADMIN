@@ -1,0 +1,97 @@
+'use client';
+
+import * as React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import Paper from '@mui/material/Paper';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import '../styles/ad201.css'
+
+// 검색창 컴포넌트
+function SearchBar() {
+    const [searchQuery, setSearchQuery] = React.useState("");
+  
+    return (
+      <div className="ad201__searchcontainer">
+        {/* 검색 옵션 */}
+        <div className="ad201__searchdropdown">
+          <select className="ad201__category" defaultValue="아이디">
+            <option value="아이디">아이디</option>
+            <option value="이름">이름</option>
+            <option value="이메일">이메일</option>
+          </select>
+        </div>
+  
+        {/* 검색바 */}
+        <div className="ad201__searchbar">
+          <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} />
+          <button type="button" >
+            <span className="material-symbols-outlined">search</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  const columns = [
+    { field: 'id', headerName: '아이디', width: 207 },
+    { field: 'Name', headerName: '이름', width: 207 },
+    { field: 'email', headerName: '이메일', width: 400 },
+    { field: 'regdate', headerName: '최초 가입일', width: 207 },
+    { field: 'level', headerName: '등급', sortable: false, width: 207 },
+  ];
+  
+  const rows = [
+    { id: 'hong', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'park', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'kim', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'lee', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'yoon', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'sdkw', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'asdf', Name: 'Clifford', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'sadeee', Name: 'Frances', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+    { id: 'hhhg', Name: 'Roxie', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+  ];
+  
+  export default function DataTable() {
+    const [page, setPage] = React.useState(1);
+    const rowsPerPage = 5;
+  
+    const handlePageChange = (event, value) => {
+      setPage(value);
+    };
+  
+    // 페이지에 맞게 데이터를 잘라냄
+    const startIndex = (page - 1) * rowsPerPage;
+    const currentRows = rows.slice(startIndex, startIndex + rowsPerPage);
+  
+    return (
+      <div className='ad201__container'>
+        <h1 className='ad201__title'>일반 회원 관리</h1>
+        <div className='ad201__search'>
+          <SearchBar />
+        </div>
+        <div className='ad201__table'>
+          <Paper sx={{ width: '100%' }}>
+            <DataGrid
+              rows={currentRows}
+              columns={columns}
+              pageSize={rowsPerPage}
+              checkboxSelection
+              sx={{ border: 0 }}
+              pagination={false} // 기본 페이지네이션 비활성화
+            />
+          </Paper>
+        </div>
+        <Stack spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
+          <Pagination
+            count={Math.ceil(rows.length / rowsPerPage)} // 총 페이지 수 계산
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Stack>
+      </div>
+    );
+  }
