@@ -1,0 +1,76 @@
+.adheader {
+    display: flex;
+    flex-direction: column;
+    background-color: #2c3e50; 
+    color: white;
+    max-width: 1920px;
+    width: 100%;
+  }
+  
+  .adheader__left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #34495e;
+  }
+  
+  .adheader__homebutton {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .adheader__userinfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .adheader__info {
+    margin-right: 15px;
+  }
+  
+  .adheader__logoutbutton {
+    background-color: #7f8c8d;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .adheader__nav {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+  
+  .adheader__ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .adheader__navbutton1, .adheader__navbutton2,
+  .adheader__navbutton3, .adheader__navbutton4,
+  .adheader__navbutton5 {
+    margin-right: 20px;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .adheader__navbutton1:hover, 
+  .adheader__navbutton2:hover, 
+  .adheader__navbutton3:hover, 
+  .adheader__navbutton4:hover, 
+  .adheader__navbutton5:hover 
+  {
+    text-decoration: underline;
+  }
