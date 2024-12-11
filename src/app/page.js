@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import contents from './styles/ad101.css';
+import styles from './styles/page.module.css';
 
 
 // 테이블1 데이터
@@ -50,23 +50,23 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 export default function HomePage() {
   return (
-    <div className="ad101__container">
+    <div className={styles.ad101__container}>
         {/* 그래프 영역 */}
-        <div className="ad101__graph">
-            <div className="ad101__graph1">
+        <div className={styles.ad101__graph}>
+            <div className={styles.ad101__graph1}>
                 <h2>Graph 1</h2>
             </div>
-            <div className="ad101__graph2">
+            <div className={styles.ad101__graph2}>
                 <h2>Graph 2</h2>
             </div>
         </div>
 
         {/* 테이블 영역 */}
-        <div className="ad101__table">
-            <div className="ad101__table1">
-                <div className='ad101__table1menu'>
-                    <h2 className='ad101__table1title'>회원 관리</h2>
-                    <h4 className='ad101__tablemenu'>더보기
+        <div className={styles.ad101__table}>
+            <div className={styles.ad101__table1}>
+                <div className={styles.ad101__table1menu}>
+                    <h2 className={styles.ad101__table1title}>회원 관리</h2>
+                    <h4 className={styles.ad101__tablemenu}>더보기
                     <span className="material-symbols-outlined">
                         keyboard_arrow_right
                     </span>
@@ -78,13 +78,25 @@ export default function HomePage() {
                         columns={columns1}
                         initialState={{ pagination: { paginationModel } }}
                         pageSizeOptions={[5, 10]}
+                        sx={{
+                            '& .MuiDataGrid-cell': {
+                                textAlign: 'center', // 모든 셀을 가운데 정렬
+                            },
+                            '& .MuiDataGrid-columnHeaders': {
+                                textAlign: 'center', // 헤더도 가운데 정렬
+                            },
+                            '& .MuiDataGrid-columnHeaderTitleContainer': {
+                                textAlign: 'center',
+                                justifyContent: 'center',
+                            }
+                        }}
                     />
                 </Paper>
             </div>
-            <div className="ad101__table2">
-                <div className='ad101__table2menu'>
-                    <h2 className='ad101__table2title'>문의 내역</h2>
-                    <h4 className='ad101__tablemenu'>더보기
+            <div className={styles.ad101__table2}>
+                <div className={styles.ad101__table2menu}>
+                    <h2 className={styles.ad101__table2title}>문의 내역</h2>
+                    <h4 className={styles.ad101__tablemenu} style={{ fontSize: '16px' }}>더보기
                     <span className="material-symbols-outlined">
                         keyboard_arrow_right
                     </span>
@@ -96,26 +108,46 @@ export default function HomePage() {
                         columns={columns2}
                         initialState={{ pagination: { paginationModel } }}
                         pageSizeOptions={[5, 10]}
+                        sx={{
+                            '& .MuiDataGrid-cell': {
+                                textAlign: 'center', // 모든 셀을 가운데 정렬
+                            },
+                            '& .MuiDataGrid-columnHeader': {
+                                textAlign: 'center', // 헤더도 가운데 정렬
+                                justifyContent: 'center',
+                                display: 'flex',
+                            },
+                            '& .MuiDataGrid-columnHeaderTitleContainer': {
+                                textAlign: 'center',
+                                justifyContent: 'center',
+                            }
+                        }}
                     />
                 </Paper>
             </div>
         </div>
              {/* 알림 아이콘 */}
-             <div className="ad101__notification">
-    <div className="ad101__notificationicon">
-        <span className="ad101__notificationicon material-symbols-outlined">notifications</span>
-        <div className="ad101__notification-badge1">1</div>
-    </div>
-    
-    <div className="ad101__notificationicon">
-        <span className="ad101__notificationicon material-symbols-outlined">notifications</span>
-        <div className="ad101__notification-badge2">5</div>
-    </div>
+             <div className={styles.ad101__notification}>
+  <div className={styles.ad101__notificationicon}>
+    <span className={`${styles.ad101__notificationicon} material-symbols-outlined`}>
+      notifications
+    </span>
+    <div className={styles.ad101__notificationbadge1}>1</div>
+  </div>
+  
+  <div className={styles.ad101__notificationicon}>
+    <span className={`${styles.ad101__notificationicon} material-symbols-outlined`}>
+      notifications
+    </span>
+    <div className={styles.ad101__notificationbadge2}>5</div>
+  </div>
 
-    <div className="ad101__notificationicon">
-        <span className="ad101__notificationicon material-symbols-outlined">notifications</span>
-        <div className="ad101__notification-badge3">9+</div>
-    </div>
+  <div className={styles.ad101__notificationicon}>
+    <span className={`${styles.ad101__notificationicon} material-symbols-outlined`}>
+      notifications
+    </span>
+    <div className={styles.ad101__notificationbadge3}>9+</div>
+  </div>
 </div>
 </div>
   );

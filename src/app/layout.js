@@ -1,4 +1,4 @@
-import '../app/globals.css'; // 전역 스타일 (필요시)
+import styles from '../app/globals.css';
 import AdminHeader from './components/AdminHeader';
 import AdminFooter from './components/AdminFooter';
 

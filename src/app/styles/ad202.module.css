@@ -3,35 +3,33 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-body {
-    font-family: "Noto Sans KR", sans-serif;
-  }
   
 
 
-.ad201__container {
+.ad202__container {
+  font-family: "Noto Sans KR", sans-serif;
     max-width: 1320px;
     width: 100%;
     margin: 0 auto;  
-    font-weight: 600;       
+    font-weight: 400;       
   }
   
-  .ad201__title {
+  .ad202__title {
     color: #000000;
     font-size: 30px;
     text-align: left;
     margin-top: 60px;
   }
   
-  .ad201__table {
+  .ad202__table {
     width: 100%;            
     max-width: 1320px;  
     margin-top: 30px;   
   }
-  .ad201__search{
+  .ad202__search{
     margin-top: 16px;
   }
-  .ad201__searchcontainer{
+  .ad202__searchcontainer{
     height: 136px;
     width: 100%;
     display: flex;
@@ -42,7 +40,7 @@ body {
     align-items: center;
   }
 
-  .ad201__searchbar{
+  .ad202__searchbar{
     width: 1030px;
     height: 40px;
     border: 1px solid #843FFE;
@@ -53,18 +51,18 @@ body {
     padding-left: 15px; 
   }
 
-  .ad201__searchbar input {
+  .ad202__searchbar input {
     border: none;
     outline: none;
     height: 100%; 
     width: 95%; 
     font-size: 16px;
   }
-  .ad201__category{
+  .ad202__category{
     width: 100%;
   }
 
-  .ad201__searchbar button {
+  .ad202__searchbar button {
     background: none; 
     border: none; 
     padding: 5px;
@@ -72,7 +70,7 @@ body {
     margin-left: 10px;
   }
 
-  .ad201__searchdropdown {
+  .ad202__searchdropdown {
     width: 160px;
     height: 40px;
     border: 1px solid #843FFE;

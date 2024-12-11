@@ -3,12 +3,10 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-body {
-    font-family: "Noto Sans KR", sans-serif;
-  }
   
  
 .ad101__container {
+  font-family: "Noto Sans KR", sans-serif;
     max-width: 1320px;
     width: 100%;
     margin: 60px auto;
@@ -93,23 +91,14 @@ body {
     color: #843FFE; 
   }
 
-  h2 {
+  .ad101__table1title, .ad101__table2title {
     font-size: 20px;
     font-weight: 500;
   }
-  h4{
+  .ad101__tablemenu{
     font-size: 16px;
     font-weight: 500;
   }
-
-  .css-5wdp45-MuiDataGrid-root .MuiDataGrid-cell--textLeft{
-    text-align: center;
-  }
-
-  .css-5wdp45-MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
-    justify-content: center;
-  }
-
 
   .ad101__notification {
     position: fixed;
@@ -149,7 +138,7 @@ body {
     transition: color 0.3s ease;
   }
 
-  .ad101__notification-badge1 {
+  .ad101__notificationbadge1 {
     position: absolute;
     top: 60px;              /* 아이콘 상단에 위치 */
     right: 40px;            /* 아이콘 우측에 위치 */
@@ -166,7 +155,7 @@ body {
 }
 
 
-  .ad101__notification-badge2 {
+  .ad101__notificationbadge2 {
     position: absolute;
     top: 230px;              /* 아이콘 상단에 위치 */
     right: 40px;            /* 아이콘 우측에 위치 */
@@ -183,7 +172,7 @@ body {
 }
 
 
-  .ad101__notification-badge3 {
+  .ad101__notificationbadge3 {
     position: absolute;
     top: 400px;              /* 아이콘 상단에 위치 */
     right: 40px;            /* 아이콘 우측에 위치 */
@@ -197,6 +186,16 @@ body {
     justify-content: center;
     align-items: center;
     font-weight: bold;      /* 숫자 강조 */
+}
+
+.MuiPaper-root {
+  text-align: center;       /* 텍스트 가운데 정렬 */
+}
+
+.MuiDataGrid-columnHeaderTitleContainer {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 
