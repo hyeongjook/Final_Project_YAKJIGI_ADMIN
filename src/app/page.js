@@ -8,13 +8,13 @@ import styles from './styles/page.module.css';
 const columns1 = [
     { field: 'idx', headerName: '회원번호', width: 90 },
     { field: 'id', headerName: '아이디', width: 130 },
-    { field: 'name', headerName: '이름', width: 80 },
+    { field: 'name', headerName: '이름', width: 100 },
     { field: 'nickname', headerName: '닉네임', width: 150 },
     { field: 'level', headerName: '등급', sortable: false, width: 120 },
 ];
 
 const rows1 = [
-    { idx: '1', id: 'dsfsd', name: 'hong', nickname: 'nickname', level: '일반' },
+    { idx: 'user_idx', id: 'user_id', name: 'user_name', nickname: 'user_nickname', level: 'user_level' },
     { idx: '2', id: 'safw', name: 'hong', nickname: 'nickname', level: '일반' },
     { idx: '3', id: 'wqerwe', name: 'hong', nickname: 'nickname', level: '일반' },
     { idx: '4', id: 'sdfhh', name: 'hong', nickname: 'nickname', level: '일반' },
@@ -34,7 +34,7 @@ const columns2 = [
 ];
 
 const rows2 = [
-    { id: '1', title: '제목입니다.', regdate: '2024.00.00', answer: '답변 대기' },
+    { id: 'qna_idx', title: 'qna_title', regdate: 'qna_regdate', answer: 'qna_answer' },
     { id: '2', title: '제목입니다', regdate: '2024.00.00', answer: '답변 대기' },
     { id: '3', title: '제목입니다', regdate: '2024.00.00', answer: '답변 대기' },
     { id: '4', title: '제목입니다', regdate: '2024.00.00', answer: '답변 대기' },

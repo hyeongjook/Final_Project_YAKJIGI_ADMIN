@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/* Material Icons 및 Outlined 스타일을 @import로 추가 */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+
+
+.ad601__container {
+  font-family: "Noto Sans KR", sans-serif;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;  
+    font-weight: 400;       
+  }
+  
+  .ad601__title {
+    color: #000000;
+    font-size: 30px;
+    text-align: left;
+    margin-top: 60px;
+  }
+  
+  .ad601__table {
+    width: 100%;            
+    max-width: 1320px;  
+    margin-top: 30px;   
+  }
+  .ad601__search{
+    margin-top: 16px;
+  }
+  .ad601__searchcontainer{
+    height: 136px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 1px solid #DDDDDD;
+    border-radius: 10px;
+    align-items: center;
+  }
+
+  .ad601__searchbar{
+    width: 1030px;
+    height: 40px;
+    border: 1px solid #843FFE;
+    border-radius: 20px;
+    padding: 5px;
+    display: flex; 
+    align-items: center;
+    padding-left: 15px; 
+  }
+
+  .ad601__searchbar input {
+    border: none;
+    outline: none;
+    height: 100%; 
+    width: 95%; 
+    font-size: 16px;
+  }
+  .ad601__category{
+    width: 100%;
+  }
+
+  .ad601__searchbar button {
+    background: none; 
+    border: none; 
+    padding: 5px;
+    cursor: pointer; 
+    margin-left: 10px;
+  }
+
+  .ad601__searchdropdown {
+    width: 160px;
+    height: 40px;
+    border: 1px solid #843FFE;
+    border-radius: 20px;
+    padding: 5px;
+    position: relative;
+  }
+
+
+  .ad601__buttoncontainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px; 
+  }
