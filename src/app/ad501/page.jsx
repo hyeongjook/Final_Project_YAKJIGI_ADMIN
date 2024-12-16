@@ -53,6 +53,14 @@ const rows = [
     { id: 'lee', Name: 'Stark', email: 'lee@naver.com', regdate: '2000-00-00', level: '일반' },
 ];
 
+ // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+ const centeredColumns = columns.map(column => ({
+    ...column,
+    headerAlign: 'center'
+  }));
+  
+  
+
 export default function DataTable() {
     const [page, setPage] = React.useState(1);
     const [selectedRows, setSelectedRows] = React.useState([]); // 선택된 행의 ID를 저장
@@ -85,7 +93,7 @@ export default function DataTable() {
     return (
         <div className={adcommons.adcommons__container}>
             <h1 className={adcommons.adcommons__title}>안전한 의약생활 - 의약품 검색하기</h1>
-            <div className={styles.ad501__search}>
+            <div className={adcommons.adcommons__search}>
                 <SearchBar />
             </div>
             <div className={adcommons.adcommons__table}>
@@ -133,7 +141,7 @@ export default function DataTable() {
                     </div>
                     <DataGrid
                         rows={currentRows}
-                        columns={columns}
+                        columns={centeredColumns}
                         pageSize={rowsPerPage}
                         checkboxSelection
                         hideFooterPagination={true}
@@ -142,6 +150,12 @@ export default function DataTable() {
                         onSelectionModelChange={(newSelectionModel) =>
                             handleSelectionModelChange(newSelectionModel) // 선택 모델 변경 핸들러 추가
                         }
+                            sx={{ border: 0,
+                                // 셀의 텍스트를 가운데 정렬
+                                '& .MuiDataGrid-cell': {
+                                  textAlign: 'center',
+                                },
+                              }}
                     />
                 </Paper>
             </div>

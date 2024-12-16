@@ -73,6 +73,13 @@ export default function DataTable() {
     ]);
   }, []);
 
+   // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+ const centeredColumns = columns.map(column => ({
+  ...column,
+  headerAlign: 'center'
+}));
+
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
@@ -141,7 +148,7 @@ export default function DataTable() {
           </div>
           <DataGrid
             rows={currentRows}
-            columns={columns}
+            columns={centeredColumns}
             pageSize={rowsPerPage}
             checkboxSelection
             hideFooterPagination={true} // 페이지네이션 숨기기
@@ -149,6 +156,13 @@ export default function DataTable() {
             onSelectionModelChange={handleSelectionChange} // 선택된 항목이 바뀔 때 호출
             selectionModel={selectedRows} // 선택된 행의 ID를 모델에 반영
             onRowClick={handleRowClick}
+            sx={{
+              // 셀의 텍스트를 가운데 정렬
+              '& .MuiDataGrid-cell': {
+                textAlign: 'center',
+              },
+            }}
+
           />
         </Paper>
       </div>

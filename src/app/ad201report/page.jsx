@@ -38,10 +38,10 @@ function SearchBar() {
 }
 
 const columns = [
-    { field: 'postNumber', headerName: '번호', width: 100, headerAlign: 'center' },
-    { field: 'report', headerName: '신고일', width: 207, headerAlign: 'center' },
-    { field: 'story', headerName: '신고 내용', width: 400, headerAlign: 'center' },
-    { field: 'id', headerName: '신고자', width: 207, headerAlign: 'center' },
+    { field: 'postNumber', headerName: '번호', width: 100 },
+    { field: 'report', headerName: '신고일', width: 207 },
+    { field: 'story', headerName: '신고 내용', width: 400 },
+    { field: 'id', headerName: '신고자', width: 207 },
     {
         field: 'done'
         , headerName: '처리 상태'
@@ -85,6 +85,13 @@ const rows = [
     { report: '2024-00-00', story: '신고 합니다.', id: 'heliopause', done: '처리완료', day: '처리완료', authorId: 'author4', postDate: '2024-01-07', postTitle: '제목4', postContent: '내용4', reporterId: 'reporter4', reportDate: '2024-01-08', reportContent: '내용5' },
     { report: '2024-00-00', story: '신고 합니다.', id: 'neptune', done: '처리완료', day: '처리완료', authorId: 'author5', postDate: '2024-01-09', postTitle: '제목5', postContent: '내용5', reporterId: 'reporter5', reportDate: '2024-01-10', reportContent: '내용6' }
 ];
+
+ // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+ const centeredColumns = columns.map(column => ({
+    ...column,
+    headerAlign: 'center'
+  }));
+  
 
 export default function DataTable() {
     const [page, setPage] = React.useState(1);
@@ -147,12 +154,17 @@ export default function DataTable() {
                 }}>
                     <DataGrid
                         rows={currentRows}
-                        columns={columns}
+                        columns={centeredColumns}
                         pageSize={rowsPerPage}
                         hideFooterPagination={true}  // 페이지네이션 숨기기
                         hideFooter={true}
                         onRowClick={(params, event) => handleRowClick(params, event)} // 행 클릭 시 위치도 함께 처리
-
+                        sx={{
+                            // 셀의 텍스트를 가운데 정렬
+                            '& .MuiDataGrid-cell': {
+                              textAlign: 'center',
+                            },
+                          }}
                     />
                 </Paper>
             </div>

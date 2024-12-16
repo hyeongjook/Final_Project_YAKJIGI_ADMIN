@@ -3,20 +3,3 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-
-  .MuiToolbar-root{
-    display: none;
-  }
-  .MuiDataGrid-footerContainer{
-    display: none;
-  }
-  .css-1bug3cd-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-    color: #fff;
-    background-color: #A42AB9;
-}
-  
-/*   button, select {
-    text-transform: none;
-    appearance: none;
-}
- */

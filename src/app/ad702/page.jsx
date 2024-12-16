@@ -62,6 +62,12 @@ function SearchBar() {
     { id: 'ssgjt', Name: 'Melisandre', title: '제목입니다', regdate: '2000.00.00', views: '2323' },
   ];
   
+ // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+ const centeredColumns = columns.map(column => ({
+  ...column,
+  headerAlign: 'center'
+}));
+
   export default function DataTable() {
     const [page, setPage] = React.useState(1);
     const [selectedRows, setSelectedRows] = React.useState([]);
@@ -128,13 +134,19 @@ function SearchBar() {
           </div>
           <DataGrid
             rows={currentRows}
-            columns={columns}
+            columns={centeredColumns}
             pageSize={rowsPerPage}
             checkboxSelection
             hideFooterPagination={true} // 페이지네이션 숨기기
             hideFooter={true}
             onSelectionModelChange={handleSelectionChange}  // 선택된 항목이 바뀔 때 호출
             selectionModel={selectedRows}  // 선택된 행의 ID를 모델에 반영
+            sx={{
+              // 셀의 텍스트를 가운데 정렬
+              '& .MuiDataGrid-cell': {
+                textAlign: 'center',
+              },
+            }}
           />
         </Paper>
       </div>

@@ -71,7 +71,7 @@ function Page(props) {
 
           {/* 파일 1 */}
           <div className={adcommons.adcommons__sub2_container_box}>
-            <div className={adcommons.adcommons__sub2_title}>첨부파일1</div>
+            <div className={adcommons.adcommons__sub2_title}>이미지</div>
             <div className={adcommons.adcommons__box}>
               <div className={adcommons.adcommons__filebox}>
                 {/* 이미지 미리보기 영역 */}

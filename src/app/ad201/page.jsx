@@ -37,13 +37,19 @@ function SearchBar() {
   }
   
   const columns = [
-    { field: 'id', headerName: '아이디',  align: 'center', headerAlign: 'center', width: 207 },
-    { field: 'Name', headerName: '이름',  align: 'center',  headerAlign: 'center',width: 207 },
-    { field: 'email', headerName: '이메일',  align: 'center',headerAlign: 'center',width: 400 },
-    { field: 'regdate', headerName: '최초 가입일', align: 'center', headerAlign: 'center',width: 207 },
-    { field: 'level', headerName: '등급', align: 'center', headerAlign: 'center',width: 207 },
+    { field: 'id', headerName: '아이디', width: 207 },
+    { field: 'Name', headerName: '이름',width: 207 },
+    { field: 'email', headerName: '이메일',width: 400 },
+    { field: 'regdate', headerName: '최초 가입일', width: 207 },
+    { field: 'level', headerName: '등급',width: 207 },
   ];
   
+ // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+ const centeredColumns = columns.map(column => ({
+  ...column,
+  headerAlign: 'center'
+}));
+
   const rows = [
     { id: 'hong', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
     { id: 'park', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
@@ -149,11 +155,16 @@ function SearchBar() {
           <Paper sx={{ width: '100%' }}>
             <DataGrid
               rows={currentRows}
-              columns={columns}
+              columns={centeredColumns}
               pageSize={rowsPerPage}
-              checkboxSelection
               hideFooterPagination={true}  // 페이지네이션 숨기기
               hideFooter={true} 
+              sx={{
+                // 셀의 텍스트를 가운데 정렬
+                '& .MuiDataGrid-cell': {
+                  textAlign: 'center',
+                },
+              }}
             />
           </Paper>
         </div>

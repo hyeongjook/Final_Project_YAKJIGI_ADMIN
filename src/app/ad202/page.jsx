@@ -36,7 +36,7 @@ function SearchBar() {
     <div className={adcommons.adcommons__searchcontainer}>
       {/* 검색 옵션 */}
       <div className={adcommons.adcommons__searchdropdown}>
-      <select className={adcommons.adcommons__category} defaultValue="아이디">
+        <select className={adcommons.adcommons__category} defaultValue="아이디">
           <option value="아이디">아이디</option>
           <option value="이름">이름</option>
           <option value="이메일">이메일</option>
@@ -64,46 +64,34 @@ const columns = [
     field: 'id',
     headerName: '아이디',
     width: 180,
-    headerAlign: 'center', 
-    align: 'center' 
   },
   {
     field: 'Name',
     headerName: '이름',
     width: 160,
-    headerAlign: 'center',
-    align: 'center' 
   },
   {
     field: 'email',
     headerName: '이메일',
     width: 450,
-    headerAlign: 'center', 
-    align: 'center' 
   },
   {
     field: 'regdate',
     headerName: '최초 가입일',
     width: 190,
-    headerAlign: 'center',
-    align: 'center' 
   },
   {
     field: 'level',
     headerName: '등급',
     width: 190,
-    headerAlign: 'center', 
-    align: 'center' 
   },
   {
     field: 'license',
     headerName: '상태',
     width: 150,
-    headerAlign: 'center',
-    align: 'center', 
     renderCell: (params) => {
       const license = params.row.license;
-      const color = licenseColor(license);  
+      const color = licenseColor(license);
       const fontWeight = license === '승인' || license === '거절' ? '600' : 'normal';
       return (
         <span style={{ color, fontWeight }}>
@@ -124,6 +112,13 @@ const rows = [
   { id: 'sadeee', Name: 'Frances', email: 'hong@naver.com', regdate: '2000.00.00', level: '전문', license: '승인' },
   { id: 'hhhg', Name: 'Roxie', email: 'hong@naver.com', regdate: '2000.00.00', level: '전문', license: '승인' }
 ];
+
+// 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+const centeredColumns = columns.map(column => ({
+  ...column,
+  headerAlign: 'center'
+}));
+
 
 export default function DataTable() {
   const [page, setPage] = React.useState(1);
@@ -153,12 +148,19 @@ export default function DataTable() {
         <Paper sx={{ width: '100%' }}>
           <DataGrid
             rows={currentRows}
-            columns={columns}
+            columns={centeredColumns}
             pageSize={rowsPerPage}
             hideFooterPagination={true} // 페이지네이션 숨기기
             hideFooter={true}
-            sx={{ border: 0 }}
             onRowClick={handleRowClick} // 행 클릭 이벤트 핸들러 추가
+            sx={{
+              border: 0,
+              // 셀의 텍스트를 가운데 정렬
+              '& .MuiDataGrid-cell': {
+                textAlign: 'center',
+              },
+            }}
+
           />
         </Paper>
       </div>
