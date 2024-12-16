@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "../styles/ad504.module.css";
+import adcommons from "../styles/adcommons.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
@@ -53,17 +54,17 @@ function Page(props) {
 
   return (
     <>
-      <div className={styles.ad504__main_background_color}>
-        <div className={styles.ad504__main_container}>
-          <p className={styles.ad504__main_name}>팝업 레이어 관리</p>
+      <div className={adcommons.adcommons__main_background_color}>
+        <div className={adcommons.adcommons__main_container}>
+          <p className={adcommons.adcommons__main_name}>팝업 레이어 관리</p>
 
           {/* 파일 1 */}
-          <div className={styles.ad504__sub2_cotainer_box}>
-            <div className={styles.ad504__sub2_title}>현재 팝업 창</div>
-            <div className={styles.ad504__box}>
-              <div className={styles.ad504__filebox}>
+          <div className={adcommons.adcommons__sub2_container_box}>
+            <div className={adcommons.adcommons__sub2_title}>현재 팝업 창</div>
+            <div className={adcommons.adcommons__box}>
+              <div className={adcommons.adcommons__filebox}>
                 <input
-                  className={styles.ad504__uploadName}
+                  className={adcommons.adcommons__uploadName}
                   value={fileName1}
                   placeholder=""
                   readOnly
@@ -81,9 +82,9 @@ function Page(props) {
 
 
 
-          <div className={styles.ad504__sub1_cotainer_box}>
-            <div className={styles.ad504__sub1_title}>구분</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>구분</div>
+            <div className={adcommons.adcommons__box}>
               <div>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel id="demo-simple-select-standard-label">
@@ -109,9 +110,9 @@ function Page(props) {
             </div>
           </div>
 
-          <div className={styles.ad504__sub1_cotainer_box}>
-            <div className={styles.ad504__sub1_title}>시간</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>시간</div>
+            <div className={adcommons.adcommons__box}>
               <div>
                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                   <InputLabel id="demo-simple-select-standard-label">
@@ -138,9 +139,9 @@ function Page(props) {
             </div>
           </div>
 
-          <div className={styles.ad504__main_cotainer_box}>
-            <div className={styles.ad504__main_title}>시작 일시</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__main_container_box}>
+            <div className={adcommons.adcommons__main_title}>시작 일시</div>
+            <div className={adcommons.adcommons__box}>
               <TextField
                 label="시작 일시"
                 type="date"
@@ -151,9 +152,9 @@ function Page(props) {
             </div>
           </div>
 
-          <div className={styles.ad504__sub1_cotainer_box}>
-            <div className={styles.ad504__sub1_title}>종료 일시</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>종료 일시</div>
+            <div className={adcommons.adcommons__box}>
               <TextField
                 label="종료 일시"
                 type="date"
@@ -164,8 +165,8 @@ function Page(props) {
             </div>
           </div>
 
-          <div className={styles.ad504__sub1_content_textarea}>
-            <div className={styles.ad504__sub1_content}>팝업 위치 설정</div>
+          <div className={adcommons.adcommons__sub1_content_textarea}>
+            <div className={adcommons.adcommons__sub1_content}>팝업 위치 설정</div>
             <div className={styles.controls}>
               <TextField
                 label="Top(px)"
@@ -217,16 +218,16 @@ function Page(props) {
 
           </div>
 
-          <div className={styles.ad504__main_cotainer_box}>
-            <div className={styles.ad504__main_title}>메인 타이틀</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__main_container_box}>
+            <div className={adcommons.adcommons__main_title}>메인 타이틀</div>
+            <div className={adcommons.adcommons__box}>
               <TextField fullWidth label="메인 타이틀" id="fullWidth" />
             </div>
           </div>
 
-          <div className={styles.ad504__main_content_textarea}>
-            <div className={styles.ad504__main_content}>내용</div>
-            <div className={styles.ad504__box}>
+          <div className={adcommons.adcommons__main_content_textarea}>
+            <div className={adcommons.adcommons__main_content}>내용</div>
+            <div className={adcommons.adcommons__box}>
               <TextField
                 id="outlined-multiline-flexible"
                 label="내용"
@@ -241,7 +242,7 @@ function Page(props) {
 
 
 
-          <div className={styles.ad504__button_box}>
+          <div className={adcommons.adcommons__button_box}>
             <Button
               variant="outlined"
               size="medium"
