@@ -6,17 +6,18 @@ import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
-import styles from '../styles/ad301.module.css'
+import styles from '../styles/ad301.module.css';
+import adcommons from '../styles/adcommons.module.css';
 
 // 검색창 컴포넌트
 function SearchBar() {
     const [searchQuery, setSearchQuery] = React.useState("");
   
     return (
-      <div className={styles.ad301__searchcontainer}>
+      <div className={adcommons.adcommons__searchcontainer}>
         {/* 검색 옵션 */}
-        <div className={styles.ad301__searchdropdown}>
-          <select className={styles.ad301__category} defaultValue="아이디">
+        <div className={adcommons.adcommons__searchdropdown}>
+          <select className={adcommons.adcommons__category} defaultValue="아이디">
             <option value="아이디">아이디</option>
             <option value="이름">이름</option>
             <option value="이메일">이메일</option>
@@ -24,7 +25,7 @@ function SearchBar() {
         </div>
   
         {/* 검색바 */}
-        <div className={styles.ad301__searchbar}>
+        <div className={adcommons.adcommons__searchbar}>
           <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)} />
           <button type="button" >
@@ -40,7 +41,7 @@ function SearchBar() {
     { field: 'Name', headerName: '이름', width: 207 },
     { field: 'email', headerName: '이메일', width: 400 },
     { field: 'regdate', headerName: '최초 가입일', width: 207 },
-    { field: 'level', headerName: '등급', sortable: false, width: 207 },
+    { field: 'level', headerName: '등급', width: 207 },
   ];
   
   const rows = [
@@ -68,12 +69,12 @@ function SearchBar() {
     const currentRows = rows.slice(startIndex, startIndex + rowsPerPage);
   
     return (
-      <div className={styles.ad301__container}>
-        <h1 className={styles.ad301__title}>관리자 관리</h1>
+      <div className={adcommons.adcommons__container}>
+        <h1 className={adcommons.adcommons__title}>관리자 관리</h1>
         <div className={styles.ad301__search}>
           <SearchBar />
         </div>
-        <div className={styles.ad301__table}>
+        <div className={adcommons.adcommons__table}>
           <Paper sx={{ width: '100%' }}>
             <DataGrid
               rows={currentRows}

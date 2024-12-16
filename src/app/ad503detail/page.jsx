@@ -5,7 +5,6 @@ import TextField, { textFieldClasses } from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 function Page(props) {
-  // 각 파일에 대한 상태를 별도로 관리
   const [fileName1, setFileName1] = useState("");
   const [filePreview1, setFilePreview1] = useState(null);  // 이미지 미리보기 상태 추가
   const [fileDescription, setFileDescription] = useState(""); // 파일에 대한 텍스트 입력 상태 추가

@@ -10,7 +10,7 @@ const columns1 = [
     { field: 'id', headerName: '아이디', width: 130 },
     { field: 'name', headerName: '이름', width: 100 },
     { field: 'nickname', headerName: '닉네임', width: 150 },
-    { field: 'level', headerName: '등급', sortable: false, width: 120 },
+    { field: 'level', headerName: '등급', sortable: false, width: 120 }
 ];
 
 const rows1 = [
@@ -22,7 +22,7 @@ const rows1 = [
     { idx: '6', id: 'gfds', name: 'hong', nickname: 'nickname', level: '일반' },
     { idx: '7', id: 'sfsew', name: 'hong', nickname: 'nickname', level: '일반' },
     { idx: '8', id: 'as23', name: 'hong', nickname: 'nickname', level: '일반' },
-    { idx: '9', id: 'df33', name: 'hong', nickname: 'nickname', level: '일반' },
+    { idx: '9', id: 'df33', name: 'hong', nickname: 'nickname', level: '일반' }
 ];
 
 // 테이블2 데이터
@@ -30,7 +30,7 @@ const columns2 = [
     { field: 'id', headerName: '문의 번호', width: 100 },
     { field: 'title', headerName: '문의 제목', width: 220 },
     { field: 'regdate', headerName: '문의 일자', width: 140 },
-    { field: 'answer', headerName: '답변 여부', width: 100 },
+    { field: 'answer', headerName: '답변 여부', width: 100 }
 ];
 
 const rows2 = [
@@ -42,7 +42,7 @@ const rows2 = [
     { id: '6', title: '제목입니다', regdate: '2024.00.00', answer: '답변 완료' },
     { id: '7', title: '제목입니다', regdate: '2024.00.00', answer: '답변 완료' },
     { id: '8', title: '제목입니다', regdate: '2024.00.00', answer: '답변 완료' },
-    { id: '9', title: '제목입니다', regdate: '2024.00.00', answer: '답변 완료' },
+    { id: '9', title: '제목입니다', regdate: '2024.00.00', answer: '답변 완료' }
 ];
 
 

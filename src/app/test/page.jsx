@@ -1,30 +1,27 @@
-'use client';
-
-import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
-import Pagination from '@mui/material/Pagination';
+"use client";
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
+import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import adcommons from "../styles/adcommons.module.css";
-import styles from '../styles/ad503.module.css'
+import { DataGrid } from '@mui/x-data-grid';
+import * as React from 'react';
+import styles from '../styles/test.module.css';
+
 
 // 검색창 컴포넌트
 function SearchBar() {
   const [searchQuery, setSearchQuery] = React.useState("");
 
   return (
-    <div className={adcommons.adcommons__searchcontainer}>
-      {/* 검색 옵션 */}
-      <div className={adcommons.adcommons__searchdropdown}>
-        <select className={adcommons.adcommons__category} defaultValue="병용금기">
-          <option value="병용금기">병용금기 검색하기</option>
+    <div className={styles.test__searchcontainer}>
+      <div className={styles.test__searchdropdown}>
+        <select className={styles.test__category} defaultValue="부작용">
+          <option value="부작용">부작용 검색하기</option>
           <option value="이름">제조사명</option>
         </select>
       </div>
 
-      {/* 검색바 */}
-      <div className={adcommons.adcommons__searchbar}>
+      <div className={styles.test__searchbar}>
         <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)} />
         <button type="button" >
@@ -40,7 +37,7 @@ const columns = [
   { field: 'Name', headerName: 'DB확정나면수정', width: 207 },
   { field: 'email', headerName: 'DB확정나면수정', width: 400 },
   { field: 'regdate', headerName: 'DB확정나면수정', width: 207 },
-  { field: 'level', headerName: 'DB확정나면수정', width: 207 },
+  { field: 'level', headerName: 'DB확정나면수정', sortable: false, width: 50 }
 ];
 
 const rows = [
@@ -58,8 +55,9 @@ const rows = [
   { id: 'sdewr', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
   { id: 'zcgh', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
   { id: 'qhjm', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'ssgjt', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
+  { id: 'ssgjt', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' }
 ];
+
 
 export default function DataTable() {
   const [page, setPage] = React.useState(1);
@@ -71,24 +69,26 @@ export default function DataTable() {
   };
 
   const handleSelectionChange = (newSelection) => {
-    setSelectedRows(newSelection.selectionModel); // 체크된 ID 목록 업데이트
+    console.log("Selected rows: ", newSelection.selectionModel);
+    setSelectedRows(newSelection.selectionModel);  // 선택된 ID 목록 업데이트
   };
 
   const startIndex = (page - 1) * rowsPerPage;
   const currentRows = rows.slice(startIndex, startIndex + rowsPerPage);
 
-  const isDeleteButtonDisabled = selectedRows.length == 0; // 선택된 항목 없으면 삭제 버튼 비활성화
+  const isDeleteButtonEnabled = selectedRows.length > 0; // 선택된 항목이 있을 때 삭제 버튼 활성화
+
 
   return (
-    <div className={adcommons.adcommons__container}>
-      <h1 className={adcommons.adcommons__title}>안전한 의약생활 - 병용금기 검색하기</h1>
-      <div className={styles.ad503__search}>
+    <div className={styles.test__container}>
+      <h1 className={styles.test__title}>신고 관리</h1>
+      <div className={styles.test__search}>
         <SearchBar />
       </div>
-      <div className={adcommons.adcommons__table}>
+      <div className={styles.test__table}>
         <Paper sx={{ width: '100%' }}>
-        <div className={adcommons.adcommons__buttoncontainer}>
-        <Button
+          <div className={styles.test__buttoncontainer}>
+            <Button
               variant="outlined"
               size="medium"
               sx={{
@@ -99,10 +99,10 @@ export default function DataTable() {
                 '&:hover': {
                   backgroundColor: 'secondary.main',
                   color: 'white',
-                  border: '1px solid #9e9e9e',
+                  border: '1px solid #9e9e9e'
                 }
               }}
-              disabled={isDeleteButtonDisabled} // 삭제 버튼 활성화/비활성화
+              disabled={!isDeleteButtonEnabled} // 삭제 버튼 활성화/비활성화
             >
               삭제하기
             </Button>
@@ -118,7 +118,7 @@ export default function DataTable() {
                 '&:hover': {
                   backgroundColor: 'secondary.main',
                   color: 'white',
-                  border: '1px solid #9e9e9e',
+                  border: '1px solid #9e9e9e'
                 }
               }}
             >

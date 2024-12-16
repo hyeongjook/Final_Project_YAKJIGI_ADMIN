@@ -13,10 +13,12 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.1.10",
     "@mui/material": "^6.1.10",
+    "@mui/styles": "^6.2.0",
     "@mui/x-data-grid": "^7.23.1",
     "next": "15.0.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "eslint": "^8",

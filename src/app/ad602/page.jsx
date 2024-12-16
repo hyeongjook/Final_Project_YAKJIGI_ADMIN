@@ -5,6 +5,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
+import adcommons from "../styles/adcommons.module.css";
 import Stack from '@mui/material/Stack';
 import styles from '../styles/ad602.module.css'
 import { Button } from '@mui/material';
@@ -14,17 +15,17 @@ function SearchBar() {
     const [searchQuery, setSearchQuery] = React.useState("");
   
     return (
-      <div className={styles.ad602__searchcontainer}>
+      <div className={adcommons.adcommons__searchcontainer}>
         {/* 검색 옵션 */}
-        <div className={styles.ad602__searchdropdown}>
-          <select className={styles.ad602__category} defaultValue="아이디">
+        <div className={adcommons.adcommons__searchdropdown}>
+          <select className={adcommons.adcommons__category} defaultValue="아이디">
             <option value="아이디">약품명</option>
             <option value="이름">제조사명</option>
           </select>
         </div>
   
         {/* 검색바 */}
-        <div className={styles.ad602__searchbar}>
+        <div className={adcommons.adcommons__searchbar}>
           <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)} />
           <button type="button" >
@@ -40,7 +41,7 @@ function SearchBar() {
     { field: 'Name', headerName: 'DB확정나면수정', width: 207 },
     { field: 'email', headerName: 'DB확정나면수정', width: 400 },
     { field: 'regdate', headerName: 'DB확정나면수정', width: 207 },
-    { field: 'level', headerName: 'DB확정나면수정', sortable: false, width: 207 },
+    { field: 'level', headerName: 'DB확정나면수정', width: 207 },
   ];
   
   const rows = [
@@ -79,15 +80,15 @@ function SearchBar() {
   
     const isDeleteButtonDisabled = selectedRows.length == 0; // 선택된 항목 없으면 삭제 버튼 비활성화
     return (
-      <div className={styles.ad602__container}>
-        <h1 className={styles.ad602__title}>폐의약품 수거함 찾아보기</h1>
+      <div className={adcommons.adcommons__container}>
+        <h1 className={adcommons.adcommons__title}>폐의약품 수거함 찾아보기</h1>
         <div className={styles.ad602__search}>
           <SearchBar />
         </div>
-        <div className={styles.ad602__table}>
+        <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
-          <div className={styles.ad602__buttoncontainer}>
-            <Button
+        <div className={adcommons.adcommons__buttoncontainer}>
+        <Button
               variant="outlined"
               size="medium"
               sx={{

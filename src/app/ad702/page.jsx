@@ -7,6 +7,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import styles from '../styles/ad702.module.css'
+import adcommons from "../styles/adcommons.module.css";
 import { Button } from '@mui/material';
 
 // 검색창 컴포넌트
@@ -14,17 +15,17 @@ function SearchBar() {
     const [searchQuery, setSearchQuery] = React.useState("");
   
     return (
-      <div className={styles.ad702__searchcontainer}>
+      <div className={adcommons.adcommons__searchcontainer}>
         {/* 검색 옵션 */}
-        <div className={styles.ad702__searchdropdown}>
-          <select className={styles.ad702__category} defaultValue="제목">
+        <div className={adcommons.adcommons__searchdropdown}>
+          <select className={adcommons.adcommons__category} defaultValue="제목">
             <option value="제목">제목</option>
             <option value="작성자">작성자</option>
           </select>
         </div>
   
         {/* 검색바 */}
-        <div className={styles.ad702__searchbar}>
+        <div className={adcommons.adcommons__searchbar}>
           <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)} />
           <button type="button" >
@@ -40,7 +41,7 @@ function SearchBar() {
     { field: 'Name', headerName: '작성자 이름', width: 207 },
     { field: 'title', headerName: '제목', width: 400 },
     { field: 'regdate', headerName: '작성일', width: 207 },
-    { field: 'views', headerName: '조회수', sortable: false, width: 207 },
+    { field: 'views', headerName: '조회수',  width: 207 },
   ];
   
   const rows = [
@@ -80,15 +81,15 @@ function SearchBar() {
     const isDeleteButtonDisabled = selectedRows.length == 0; // 선택된 항목 없으면 삭제 버튼 비활성화
   
     return (
-      <div className={styles.ad702__container}>
-        <h1 className={styles.ad702__title}>자주 묻는 질문 관리</h1>
+      <div className={adcommons.adcommons__container}>
+        <h1 className={adcommons.adcommons__title}>자주 묻는 질문 관리</h1>
         <div className={styles.ad702__search}>
           <SearchBar />
         </div>
-        <div className={styles.ad702__table}>
+        <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
-          <div className={styles.ad702__buttoncontainer}>
-            <Button
+        <div className={adcommons.adcommons__buttoncontainer}>
+        <Button
               variant="outlined"
               size="medium"
               sx={{

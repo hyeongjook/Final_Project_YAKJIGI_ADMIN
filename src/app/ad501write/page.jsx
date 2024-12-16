@@ -70,7 +70,7 @@ function Page(props) {
 
           {/* 파일 1 */}
           <div className={styles.ad501__sub2_cotainer_box}>
-            <div className={styles.ad501__sub2_title}>첨부파일1</div>
+            <div className={styles.ad501__sub2_title}>첨부파일</div>
             <div className={styles.ad501__box}>
               <div className={styles.ad501__filebox}>
                 {/* 이미지 미리보기 영역 */}
@@ -79,16 +79,6 @@ function Page(props) {
                     <img src={filePreview1} alt="파일 미리보기" className={styles.ad501__imagePreview} />
                   )}
                 </div>
-               {/*  <div className={styles.ad501__description}>
-                 <label htmlFor="file1">파일 설명</label>
-                <TextField
-                id="outlined-multiline-flexible"
-                multiline
-                maxRows={1}
-                rows={1}
-                fullWidth
-              />
-              </div> */}
                 <input
                   className={styles.ad501__uploadName}
                   value={fileName1}
