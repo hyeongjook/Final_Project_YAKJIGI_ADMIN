@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import styles from "../styles/ad502detail.module.css";
+import adcommons from "../styles/adcommons.module.css";
+
 import TextField, { textFieldClasses } from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
@@ -30,33 +32,33 @@ function Page(props) {
 
   return (
     <>
-      <div className={styles.ad502detail__main_background_color}>
-        <div className={styles.ad502detail__main_container}>
-          <p className={styles.ad502detail__main_name}>안전한 의약생활 - 병용금기 상세보기 및 추가하기</p>
-          <div className={styles.ad502detail__main_cotainer_box}>
-            <div className={styles.ad502detail__main_title}>약품명</div>
-            <div className={styles.ad502detail__box}>
+      <div className={adcommons.adcommons__main_background_color}>
+        <div className={adcommons.adcommons__main_container}>
+          <p className={adcommons.adcommons__main_name}>안전한 의약생활 - 부작용 상세보기 및 수정하기</p>
+          <div className={adcommons.adcommons__main_container_box}>
+            <div className={adcommons.adcommons__main_title}>약품명</div>
+            <div className={adcommons.adcommons__box}>
               <TextField fullWidth label="약품명" id="fullWidth" />
             </div>
           </div>
 
-          <div className={styles.ad502detail__main_cotainer_box}>
-            <div className={styles.ad502detail__main_title}>제조사</div>
-            <div className={styles.ad502detail__box}>
+          <div className={adcommons.adcommons__main_container_box}>
+            <div className={adcommons.adcommons__main_title}>제조사</div>
+            <div className={adcommons.adcommons__box}>
               <TextField fullWidth label="제조사명" id="fullWidth" />
             </div>
           </div>
 
-          <div className={styles.ad502detail__sub1_cotainer_box}>
-            <div className={styles.ad502detail__sub1_title}>약의 효능</div>
-            <div className={styles.ad502detail__box}>
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>약의 효능</div>
+            <div className={adcommons.adcommons__box}>
               <TextField fullWidth label="내용" id="fullWidth" />
             </div>
           </div>
 
-          <div className={styles.ad502detail__sub1_content_textarea}>
-            <div className={styles.ad502detail__sub1_content}>부작용</div>
-            <div className={styles.ad502detail__box}>
+          <div className={adcommons.adcommons__sub1_content_textarea}>
+            <div className={adcommons.adcommons__sub1_content}>부작용</div>
+            <div className={adcommons.adcommons__box}>
               <TextField
                 id="outlined-multiline-flexible"
                 label="내용"
@@ -68,18 +70,18 @@ function Page(props) {
             </div>
           </div>
 
-              {/* 파일 1 */}
-              <div className={styles.ad502detail__sub2_cotainer_box}>
-            <div className={styles.ad502detail__sub2_title}>첨부파일1</div>
-            <div className={styles.ad502detail__box}>
-              <div className={styles.ad502detail__filebox}>
+          {/* 파일 1 */}
+          <div className={adcommons.adcommons__sub2_container_box}>
+            <div className={adcommons.adcommons__sub2_title}>이미지</div>
+            <div className={adcommons.adcommons__box}>
+              <div className={adcommons.adcommons__filebox}>
                 {/* 이미지 미리보기 영역 */}
-                <div className={styles.ad502detail__imgbox}>
+                <div className={adcommons.adcommons__imgbox}>
                   {filePreview1 && (
-                    <img src={filePreview1} alt="파일 미리보기" className={styles.ad502detail__imagePreview} />
+                    <img src={filePreview1} alt="파일 미리보기" className={adcommons.adcommons__imagePreview} />
                   )}
                 </div>
-               {/*  <div className={styles.ad502detail__description}>
+                {/*  <div className={adcommons.adcommons__description}>
                  <label htmlFor="file1">파일 설명</label>
                 <TextField
                 id="outlined-multiline-flexible"
@@ -90,7 +92,7 @@ function Page(props) {
               />
               </div> */}
                 <input
-                  className={styles.ad502detail__uploadName}
+                  className={adcommons.adcommons__uploadName}
                   value={fileName1}
                   placeholder=""
                   readOnly
@@ -106,53 +108,58 @@ function Page(props) {
             </div>
           </div>
 
-          <div className={styles.ad502detail__button_box}>
+          <div className={adcommons.adcommons__button_box}>
             <Button
-              variant="outlined"
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
               size="medium"
               sx={{
-                backgroundColor: "white",
-                color: "#9C27B0",
-                border: "1px solid #9C27B0",
-                "&:hover": {
-                  backgroundColor: "secondary.main",
-                  color: "white",
-                  border: "1px solid #9e9e9e",
-                },
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
               }}
             >
               저장
             </Button>
 
             <Button
-              variant="outlined"
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
               size="medium"
               sx={{
-                backgroundColor: "white",
-                color: "#9C27B0",
-                border: "1px solid #9C27B0",
-                "&:hover": {
-                  backgroundColor: "secondary.main",
-                  color: "white",
-                  border: "1px solid #9e9e9e",
-                },
+                marginLeft: "15px",
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
               }}
             >
               삭제
             </Button>
 
             <Button
-              variant="outlined"
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
               size="medium"
               sx={{
-                backgroundColor: "white",
-                color: "#9C27B0",
-                border: "1px solid #9C27B0",
-                "&:hover": {
-                  backgroundColor: "secondary.main",
-                  color: "white",
-                  border: "1px solid #9e9e9e",
-                },
+                marginLeft: "15px",
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
               }}
             >
               취소

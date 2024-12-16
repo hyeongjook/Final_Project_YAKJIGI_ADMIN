@@ -16,6 +16,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .admin-user-color {
@@ -36,7 +37,6 @@ body {
 }
 
 .admin-Header {
-  font-family: "Noto Sans KR", sans-serif;
   max-width: 1920px;
   width: 100%
 }
@@ -74,7 +74,7 @@ li {
 /* 드롭다운 메뉴 */
 .dropdown {
   position: absolute;
-  top: 100%;
+  top:76px;
   left: 0;
   background-color: #ffffff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -84,20 +84,25 @@ li {
   min-width: 200px;
   padding: 10px 0;
   z-index: 1000;
+  border: 1px solid #ddd;
 }
 
 /* 드롭다운 항목 */
 .dropdown-item {
+  position: relative;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
   color: #333;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  margin-bottom: 2px;
 }
 
 .dropdown-item:hover {
-  background-color: #522020;
+  background-color: #d399ee;
+  color: #fff;
+  transition: all 0.3s;
 }
 
 /* 메뉴 옵션 */
@@ -108,4 +113,38 @@ li {
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.dropdown-right {
+  position: absolute;
+  /* left: 100%; */
+  background-color: #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 10px 0;
+  z-index: 1000;
+  left: 100%;
+  top: 0;
+  background-color: #fff;
+}
+
+/* 드롭다운 항목 */
+.dropdown-item-right {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.dropdown-item-right:hover {
+  background-color: #E0C3ED;
+  color: #fff;
+  transition: all 0.3s;
 }

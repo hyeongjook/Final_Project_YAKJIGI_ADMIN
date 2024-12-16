@@ -1,15 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../styles/ad202detail.module.css";
-import adcommons from "../styles/adcommons.module.css";
+import styles from "../styles/ad301detail.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import adcommons from "../styles/adcommons.module.css";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function Page(props) {
   // 각 파일에 대한 상태를 별도로 관리
-  const [fileName1, setFileName1] = useState("");  // 면허증 파일 이름
-  const [fileName2, setFileName2] = useState("");  // 이미지 파일 이름
-  const [filePreview2, setFilePreview2] = useState(null);  // 이미지 미리보기 이미지
+  const [fileName1, setFileName1] = useState(""); 
+  const [filePreview1, setFilePreview1] = useState(null); 
 
   // 파일 선택 시 상태 업데이트 함수
   const handleFileChange = (event, setFileName, setFilePreview) => {
@@ -24,13 +27,19 @@ function Page(props) {
     }
   };
 
+  const [authority, setAuthority] = React.useState('');
+
+  const handleChange = (e) => {
+    setAuthority(e.target.value);
+  };
+
   return (
     <>
       <div className={adcommons.adcommons__main_background_color}>
         <div className={adcommons.adcommons__main_container}>
-          <p className={adcommons.adcommons__main_name}>전문 회원 관리</p>
+          <p className={adcommons.adcommons__main_name}>관리자 상세보기</p>
           <div className={adcommons.adcommons__main_container_box}>
-            <div className={adcommons.adcommons__main_title}>닉네임</div>
+            <div className={adcommons.adcommons__main_title}>아이디</div>
             <div className={adcommons.adcommons__box}>
               <TextField fullWidth label="닉네임" id="fullWidth" />
             </div>
@@ -50,11 +59,45 @@ function Page(props) {
             </div>
           </div>
 
-          {/* 면허증 파일 - 이미지 미리보기는 제거 */}
+          {/* 페이지 권한이 부여된 항목 표시 select */}
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>권한</div>
+            <div className={adcommons.adcommons__box}>
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">authority</InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  value={authority}
+                  onChange={handleChange}
+                  label="권한"
+                >
+                  <MenuItem value="">
+                    <em>없음</em>
+                  </MenuItem>
+                  <MenuItem value={10}>회원</MenuItem>
+                  <MenuItem value={20}>페이지</MenuItem>
+                  <MenuItem value={30}>커뮤니티</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+
+          {/* 이미지 */}
           <div className={adcommons.adcommons__sub2_container_box}>
-            <div className={adcommons.adcommons__sub2_title}>면허증</div>
+            <div className={adcommons.adcommons__sub2_title}>이미지</div>
             <div className={adcommons.adcommons__box}>
               <div className={adcommons.adcommons__filebox}>
+                {/* 이미지 미리보기 영역 */}
+                <div className={adcommons.adcommons__imgbox}>
+                  {filePreview1 && (
+                    <img
+                      src={filePreview1}
+                      alt="파일 미리보기"
+                      className={adcommons.adcommons__imagePreview}
+                    />
+                  )}
+                </div>
                 <input
                   className={adcommons.adcommons__uploadName}
                   value={fileName1}
@@ -66,39 +109,7 @@ function Page(props) {
                   type="file"
                   id="file1"
                   name="file_name1"
-                  onChange={(e) => handleFileChange(e, setFileName1)} // 면허증 파일만 선택
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* 이미지 파일 - 미리보기 기능 추가 */}
-          <div className={adcommons.adcommons__sub2_container_box}>
-            <div className={adcommons.adcommons__sub2_title}>이미지</div>
-            <div className={adcommons.adcommons__box}>
-              <div className={adcommons.adcommons__filebox}>
-                {/* 이미지 미리보기 영역 */}
-                <div className={adcommons.adcommons__imgbox}>
-                  {filePreview2 && (
-                    <img
-                      src={filePreview2}
-                      alt="파일 미리보기"
-                      className={adcommons.adcommons__imagePreview}
-                    />
-                  )}
-                </div>
-                <input
-                  className={adcommons.adcommons__uploadName}
-                  value={fileName2}
-                  placeholder=""
-                  readOnly
-                />
-                <label htmlFor="file2">파일찾기</label>
-                <input
-                  type="file"
-                  id="file2"
-                  name="file_name2"
-                  onChange={(e) => handleFileChange(e, setFileName2, setFilePreview2)} // 이미지 파일 선택
+                  onChange={(e) => handleFileChange(e, setFileName1, setFilePreview1)} // 첨부파일 상태 업데이트 및 미리보기
                 />
               </div>
             </div>
@@ -109,14 +120,14 @@ function Page(props) {
               variant="outlined"
               size="medium"
               sx={{
-                backgroundColor: 'white',
-                color: '#9e9e9e',
-                border: '1px solid #9e9e9e',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                }
+                backgroundColor: "white",
+                color: "#9e9e9e",
+                border: "1px solid #9e9e9e",
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  color: "white",
+                  border: "1px solid #9e9e9e",
+                },
               }}
             >
               저장
@@ -127,32 +138,14 @@ function Page(props) {
               size="medium"
               sx={{
                 marginLeft: "15px",
-                backgroundColor: 'white',
-                color: '#9e9e9e',
-                border: '1px solid #9e9e9e',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                }
-              }}
-            >
-              삭제
-            </Button>
-
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{
-                marginLeft: "15px",
-                backgroundColor: 'white',
-                color: '#9e9e9e',
-                border: '1px solid #9e9e9e',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                }
+                backgroundColor: "white",
+                color: "#9e9e9e",
+                border: "1px solid #9e9e9e",
+                "&:hover": {
+                  backgroundColor: "secondary.main",
+                  color: "white",
+                  border: "1px solid #9e9e9e",
+                },
               }}
             >
               취소
