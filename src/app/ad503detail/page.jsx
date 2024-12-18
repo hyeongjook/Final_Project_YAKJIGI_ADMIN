@@ -33,7 +33,7 @@ function Page(props) {
     <>
       <div className={adcommons.adcommons__main_background_color}>
         <div className={adcommons.adcommons__main_container}>
-          <p className={adcommons.adcommons__main_name}>안전한 의약생활 - 병용금기 상세보기 및 추가하기</p>
+          <p className={adcommons.adcommons__main_name}>안전한 의약생활 - 병용금기 상세보기 및 수정하기</p>
           <div className={adcommons.adcommons__main_container_box}>
             <div className={adcommons.adcommons__main_title}>약품명</div>
             <div className={adcommons.adcommons__box}>
