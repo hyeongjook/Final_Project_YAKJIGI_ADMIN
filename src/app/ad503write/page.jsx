@@ -80,16 +80,6 @@ function Page(props) {
                     <img src={filePreview1} alt="파일 미리보기" className={adcommons.adcommons__imagePreview} />
                   )}
                 </div>
-               {/*  <div className={adcommons.adcommons__description}>
-                 <label htmlFor="file1">파일 설명</label>
-                <TextField
-                id="outlined-multiline-flexible"
-                multiline
-                maxRows={1}
-                rows={1}
-                fullWidth
-              />
-              </div> */}
                 <input
                   className={adcommons.adcommons__uploadName}
                   value={fileName1}
