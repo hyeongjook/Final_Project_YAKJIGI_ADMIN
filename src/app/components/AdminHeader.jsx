@@ -44,7 +44,12 @@ function Page() {
             {/* 상단 사용자 정보 */}
             <div className="admin-user-color">
                 <div className="admin-user">
-                    <p>아이콘</p>
+                    <div className="admin-homepage">
+                        <span className="material-symbols-outlined">
+                            home
+                        </span>
+                        <p>홈페이지</p>
+                    </div>
                     <p>내 정보</p>
                     <p>로그아웃</p>
                 </div>

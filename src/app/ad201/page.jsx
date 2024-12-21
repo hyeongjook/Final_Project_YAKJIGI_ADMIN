@@ -148,7 +148,7 @@ function SearchBar() {
     return (
       <div className={adcommons.adcommons__container}>
         <h1 className={adcommons.adcommons__title}>일반 회원 관리</h1>
-        <div className={styles.ad201__search}>
+        <div className={adcommons.adcommons__search}>
           <SearchBar />
         </div>
         <div className={adcommons.adcommons__table}>
