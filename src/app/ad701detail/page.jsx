@@ -45,7 +45,7 @@ function Page(props) {
           <div className={adcommons.adcommons__main_container_box}>
             <div className={adcommons.adcommons__main_title}>내용</div>
             <div className={adcommons.adcommons__box}>
-              <TextareaAutosize className={styles.ad702write__textarea}
+              <TextareaAutosize className={styles.ad701detail__textarea}
                 minRows={3}
                 maxRows={6}
                 placeholder="내용"

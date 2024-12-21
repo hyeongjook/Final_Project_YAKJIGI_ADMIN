@@ -2,7 +2,7 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import styles from "../styles/ad702write.module.css";
+import styles from "../styles/ad702detail.module.css";
 import adcommons from "../styles/adcommons.module.css";
 import { TextareaAutosize } from "@mui/material";
 
@@ -42,10 +42,10 @@ function Page(props) {
                         </div>
                     </div>
 
-                    <div className={styles.ad702write__main_container_box}>
-                        <div className={styles.ad702write__main_title}>답변</div>
-                        <div className={styles.ad702write__box}>
-                            <TextareaAutosize className={styles.ad702write__textarea}
+                    <div className={styles.ad702detail__main_container_box}>
+                        <div className={styles.ad702detail__main_title}>답변</div>
+                        <div className={styles.ad702detail__box}>
+                            <TextareaAutosize className={styles.ad702detail__textarea}
                                 minRows={3}
                                 maxRows={6}
                                 placeholder="내용"
