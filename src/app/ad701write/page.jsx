@@ -4,6 +4,7 @@ import styles from "../styles/ad701write.module.css";
 import TextField, { textFieldClasses } from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import adcommons from "../styles/adcommons.module.css";
+import { TextareaAutosize } from "@mui/material";
 
 function Page(props) {
   // 각 파일에 대한 상태를 별도로 관리
@@ -44,7 +45,12 @@ function Page(props) {
           <div className={adcommons.adcommons__main_container_box}>
             <div className={adcommons.adcommons__main_title}>내용</div>
             <div className={adcommons.adcommons__box}>
-              <TextField fullWidth label="내용" id="fullWidth" />
+            <TextareaAutosize className={styles.ad702write__textarea}
+                                minRows={3}
+                                maxRows={6}
+                                placeholder="내용"
+                                style={{ width: '100%', borderRadius: '5px' }}
+                            />
             </div>
           </div>
 

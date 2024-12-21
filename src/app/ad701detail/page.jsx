@@ -4,6 +4,7 @@ import styles from "../styles/ad701detail.module.css";
 import TextField, { textFieldClasses } from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import adcommons from "../styles/adcommons.module.css";
+import { TextareaAutosize } from "@mui/material";
 
 function Page(props) {
   // 각 파일에 대한 상태를 별도로 관리
@@ -44,7 +45,12 @@ function Page(props) {
           <div className={adcommons.adcommons__main_container_box}>
             <div className={adcommons.adcommons__main_title}>내용</div>
             <div className={adcommons.adcommons__box}>
-              <TextField fullWidth label="내용" id="fullWidth" />
+              <TextareaAutosize className={styles.ad702write__textarea}
+                minRows={3}
+                maxRows={6}
+                placeholder="내용"
+                style={{ width: '100%', borderRadius: '5px' }}
+              />
             </div>
           </div>
 
@@ -80,56 +86,56 @@ function Page(props) {
 
           <div className={adcommons.adcommons__button_box}>
             <Button
-               variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
-               size="medium"
-               sx={{
-                   backgroundColor: 'white',  // 배경을 흰색으로 설정
-                   color: '#9e9e9e',  // 글자 색상 #9e9e9e
-                   border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
-                   '&:hover': {
-                       backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
-                       color: 'white',  // hover 시 글자 색상 흰색
-                       border: '1px solid #9e9e9e',  // hover 시 보더 색상
-                       
-                   }
-               }} 
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
+              size="medium"
+              sx={{
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
+              }}
             >
               저장
             </Button>
 
             <Button
-               variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
-               size="medium"
-               sx={{
-                  marginLeft: '15px',
-                   backgroundColor: 'white',  // 배경을 흰색으로 설정
-                   color: '#9e9e9e',  // 글자 색상 #9e9e9e
-                   border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
-                   '&:hover': {
-                       backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
-                       color: 'white',  // hover 시 글자 색상 흰색
-                       border: '1px solid #9e9e9e',  // hover 시 보더 색상
-                       
-                   }
-               }} 
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
+              size="medium"
+              sx={{
+                marginLeft: '15px',
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
+              }}
             >
               삭제
             </Button>
             <Button
-               variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
-               size="medium"
-               sx={{
-                  marginLeft: '15px',
-                   backgroundColor: 'white',  // 배경을 흰색으로 설정
-                   color: '#9e9e9e',  // 글자 색상 #9e9e9e
-                   border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
-                   '&:hover': {
-                       backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
-                       color: 'white',  // hover 시 글자 색상 흰색
-                       border: '1px solid #9e9e9e',  // hover 시 보더 색상
-                       
-                   }
-               }} 
+              variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
+              size="medium"
+              sx={{
+                marginLeft: '15px',
+                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                '&:hover': {
+                  backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                  color: 'white',  // hover 시 글자 색상 흰색
+                  border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                }
+              }}
             >
               취소
             </Button>
