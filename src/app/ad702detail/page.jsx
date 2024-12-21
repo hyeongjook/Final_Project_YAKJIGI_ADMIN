@@ -92,6 +92,24 @@ function Page(props) {
                                 }
                             }}
                         >
+                            삭제
+                        </Button>
+                        <Button
+                            variant="outlined"  // 버튼의 기본 스타일을 outlined로 설정 (배경이 투명)
+                            size="medium"
+                            sx={{
+                                marginLeft: '15px',
+                                backgroundColor: 'white',  // 배경을 흰색으로 설정
+                                color: '#9e9e9e',  // 글자 색상 #9e9e9e
+                                border: '1px solid #9e9e9e',  // 보더 색상 #9e9e9e
+                                '&:hover': {
+                                    backgroundColor: 'secondary.main',  // hover 시 배경 색상 (secondary 색상)
+                                    color: 'white',  // hover 시 글자 색상 흰색
+                                    border: '1px solid #9e9e9e',  // hover 시 보더 색상
+
+                                }
+                            }}
+                        >
                             취소
                         </Button>
                     </div>

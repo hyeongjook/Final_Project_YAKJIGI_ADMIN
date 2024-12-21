@@ -27,7 +27,7 @@
     align-self: center;
 }
 .ad702write__textarea{
-    border: 1px solid #c5c3c3;
+    border: 1px solid #ddd;
     resize: none;
-    padding: 5px;
+    padding: 12px;
 }
