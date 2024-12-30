@@ -5,7 +5,7 @@ const dbConfig = {
   host: 'localhost', 
   user: 'proj',      
   password: '0000', 
-  database: 'ictedu_db', 
+  database: 'user_db', 
 };
 
 export async function connect() {
