@@ -91,7 +91,9 @@ export default function DataTable() {
       const data = await response.json();
 
       if (data.success) {
-        setUsers(data.data || []);
+        // user_level_idx가 1인 데이터만 필터링
+        const filteredUsers = data.data.filter(user => user.user_level_idx === 1);
+        setUsers(filteredUsers);  // 필터링된 데이터만 상태에 저장
       } else {
         setError("회원 목록을 불러오는 데 실패했습니다.");
       }
