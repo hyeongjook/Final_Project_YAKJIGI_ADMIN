@@ -1,30 +1,30 @@
 'use client';
 
-import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
+import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import { DataGrid } from '@mui/x-data-grid';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styles from '../styles/ad201.module.css';
 import adcommons from '../styles/adcommons.module.css';
 
-// 검색창 컴포넌트
-function SearchBar() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-
+// 검색 바 컴포넌트
+function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCategory }) {
   return (
     <div className={adcommons.adcommons__searchcontainer}>
-      {/* 검색 옵션 */}
       <div className={adcommons.adcommons__searchdropdown}>
-        <select className={adcommons.adcommons__category} defaultValue="아이디">
-          <option value="아이디">아이디</option>
-          <option value="이름">이름</option>
-          <option value="이메일">이메일</option>
+        <select
+          className={adcommons.adcommons__category}
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+        >
+          <option value="user_id">아이디</option>
+          <option value="user_name">이름</option>
+          <option value="user_email">이메일</option>
         </select>
       </div>
 
-      {/* 검색바 */}
       <div className={adcommons.adcommons__searchbar}>
         <input
           type="text"
@@ -40,6 +40,7 @@ function SearchBar() {
   );
 }
 
+// 테이블 컬럼 정의
 const columns = [
   { field: 'user_idx', headerName: 'user_idx', width: 80 },
   { field: 'user_id', headerName: '아이디', width: 190 },
@@ -50,15 +51,19 @@ const columns = [
   { field: 'user_level_idx', headerName: '등급', width: 180 },
 ];
 
-// 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
+// 각 컬럼을 중앙 정렬
 const centeredColumns = columns.map((column) => ({
   ...column,
   headerAlign: 'center',
 }));
 
 export default function DataTable() {
-  const [page, setPage] = React.useState(1);
-  const [users, setUsers] = React.useState([]);
+  const [page, setPage] = useState(1);
+  const [users, setUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchCategory, setSearchCategory] = useState("user_id");  // 검색 카테고리 추가
+  const [loading, setLoading] = useState(false); // 로딩 상태 추가
+  const [error, setError] = useState(null); // 에러 상태 추가
   const rowsPerPage = 5;
   const router = useRouter();
 
@@ -67,45 +72,73 @@ export default function DataTable() {
     setPage(value);
   };
 
-  // 데이터 로딩
-  React.useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('/api/users'); // API 경로
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error('데이터 로딩 실패:', error);
-      }
-    };
-    fetchUsers();
-  }, []);
-
   // 페이지에 맞는 데이터 계산
   const startIndex = (page - 1) * rowsPerPage;
   const currentRows = users.slice(startIndex, startIndex + rowsPerPage);
 
+  // 데이터 행 클릭 시 상세보기 페이지로 이동
   const handleRowClick = (params) => {
     const { user_idx } = params.row;
-    router.push(`/ad201detail?${user_idx}`); // 상세보기 페이지로 이동
+    router.push(`/ad201detail?user_idx=${user_idx}`);
   };
+
+  // 데이터를 백엔드에서 가져오는 함수
+  const fetchUsers = async () => {
+    setLoading(true);  // 로딩 시작
+    try {
+      // 검색 카테고리와 검색어를 쿼리 파라미터로 전달
+      const response = await fetch(`http://localhost:8080/api/user_info/list?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
+      const data = await response.json();
+
+      if (data.success) {
+        setUsers(data.data || []);
+      } else {
+        setError("회원 목록을 불러오는 데 실패했습니다.");
+      }
+    } catch (error) {
+      setError("데이터를 가져오는 중 오류가 발생했습니다.");
+      console.error('Error fetching users:', error);
+    }
+    setLoading(false);  // 로딩 종료
+  };
+
+  // 초기 데이터 로딩
+  useEffect(() => {
+    fetchUsers();  // 사용자 데이터를 불러옵니다.
+  }, [searchQuery, searchCategory]);  // 검색어와 카테고리 변경 시 데이터 새로 가져오기
+
+  // 검색어 변경 시 페이지 리셋
+  useEffect(() => {
+    setPage(1);
+  }, [searchQuery, searchCategory]);
 
   return (
     <div className={adcommons.adcommons__container}>
       <h1 className={adcommons.adcommons__title}>일반 회원 관리</h1>
+
       <div className={styles.ad201__search}>
-        <SearchBar />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchCategory={searchCategory}
+          setSearchCategory={setSearchCategory}
+        />
       </div>
+
+      {loading && <div>로딩 중...</div>} {/* 로딩 중 표시 */}
+
+      {error && <div className="error-message">{`오류: ${error}`}</div>} {/* 에러 메시지 표시 */}
+
       <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
           <DataGrid
             rows={currentRows}
             columns={centeredColumns}
             pageSize={rowsPerPage}
-            hideFooterPagination={true} // 페이지네이션 숨기기
+            hideFooterPagination={true}
             hideFooter={true}
             onRowClick={handleRowClick}
-            getRowId={(row) => row.user_idx}  // user_idx를 고유 id로 사용
+            getRowId={(row) => row.user_idx}
             sx={{
               border: 0,
               '& .MuiDataGrid-cell': {
@@ -118,9 +151,10 @@ export default function DataTable() {
           />
         </Paper>
       </div>
+
       <Stack spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
         <Pagination
-          count={Math.ceil(users.length / rowsPerPage)} // 총 페이지 수 계산
+          count={Math.ceil(users.length / rowsPerPage)}
           page={page}
           onChange={handlePageChange}
           color="secondary"
