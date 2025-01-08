@@ -1,14 +1,14 @@
-'use client'; // 클라이언트 사이드에서만 실행
+'use client'; 
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'; // 클라이언트 사이드에서만 사용 가능
-import styles from '../styles/ad201detail.module.css';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { useRouter } from 'next/navigation';  
+import { useEffect, useState } from 'react';
+import styles from '../styles/ad201detail.module.css';
 
 function Page() {
-  const router = useRouter();
-  const { query, isReady } = router; // query와 isReady를 가져옵니다.
+  const router = useRouter();  
+  const { query, isReady } = router;
   const [userDetails, setUserDetails] = useState({
     user_id: '',
     user_name: '',
@@ -20,46 +20,59 @@ function Page() {
     user_reg_date: '',
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);  // 오류 상태 추가
 
-  // isReady가 true일 때만 user_idx 사용
   const user_idx = isReady && query.user_idx ? parseInt(query.user_idx, 10) : null;
 
-  // user_idx가 준비되었을 때만 데이터를 로딩하도록 useEffect 사용
+  // user_idx가 비어있을 경우 로딩을 멈추고 처리할 수 있도록 개선
   useEffect(() => {
-    if (user_idx) {
-      const fetchUserDetails = async () => {
-        setLoading(true);
-        try {
-          const response = await fetch(`http://localhost:8080/api/user_info/detail/${user_idx}`);
-          const data = await response.json();
-
-          if (data.success) {
-            setUserDetails(data.data);
-          } else {
-            alert('사용자 정보 조회 실패');
-          }
-        } catch (error) {
-          console.error('사용자 정보 로딩 실패:', error);
-          alert('사용자 정보를 가져오는 데 실패했습니다.');
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchUserDetails();
+    if (user_idx === null) {
+      console.log('user_idx가 아직 설정되지 않았습니다.');
+      return;
     }
-  }, [user_idx]); // user_idx가 변경될 때마다 실행
 
-  if (!isReady) {
-    return <div>로딩 중...</div>; // 라우터가 준비되지 않았을 때 로딩 상태 표시
+    const fetchUserDetails = async () => {
+      setLoading(true);
+      setError(null);  // 에러 초기화
+
+      try {
+        console.log(`Fetching data for user_idx: ${user_idx}`);  // fetch 요청 전에 로그 출력
+
+        const response = await fetch(`http://localhost:8080/api/user_info/detail/${user_idx}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('API response:', data);  // API 응답 데이터 확인용 로그
+
+        if (data.success) {
+          setUserDetails(data.data);
+        } else {
+          setError('사용자 정보 조회 실패');
+        }
+      } catch (error) {
+        console.error('사용자 정보 로딩 실패:', error);
+        setError('사용자 정보를 가져오는 데 실패했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserDetails();
+  }, [user_idx]);  // user_idx 값이 바뀔 때마다 실행
+
+  // 로딩 상태나 오류 처리
+  if (!isReady || loading) {
+    return <div>로딩 중...</div>;
   }
 
-  if (loading) {
-    return <div>로딩 중...</div>; // 데이터를 로딩 중일 때 로딩 상태 표시
+  if (error) {
+    return <div>{error}</div>;  // 오류 메시지 표시
   }
 
   if (!user_idx) {
-    return <div>잘못된 접근입니다.</div>; // user_idx가 없을 경우 표시
+    return <div>잘못된 접근입니다.</div>;
   }
 
   return (
@@ -79,7 +92,6 @@ function Page() {
           </div>
         </div>
 
-        {/* 다른 필드들... */}
 
         <div className={styles.ad201_detail__button_box}>
           <Button
@@ -95,7 +107,7 @@ function Page() {
                 border: '1px solid #9e9e9e',
               },
             }}
-            onClick={() => router.back()} // 뒤로 가기
+            onClick={() => router.back()}  // 뒤로 가기
           >
             뒤로가기
           </Button>
