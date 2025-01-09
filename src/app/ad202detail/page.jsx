@@ -50,6 +50,18 @@ function Page(props) {
             </div>
           </div>
 
+          <div className={adcommons.adcommons__sub1_container_box}>
+            <div className={adcommons.adcommons__sub1_title}>회원 등급</div>
+            <div className={adcommons.adcommons__box}>
+              <TextField
+                fullWidth
+                label="회원 등급"
+                value={userDetails.user_level_desc}
+                id="user_level_desc"
+                disabled
+              />
+            </div>
+          </div>
           {/* 면허증 파일 - 이미지 미리보기는 제거 */}
           <div className={adcommons.adcommons__sub2_container_box}>
             <div className={adcommons.adcommons__sub2_title}>면허증</div>

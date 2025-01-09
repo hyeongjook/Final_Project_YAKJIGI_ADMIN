@@ -42,13 +42,13 @@ function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCateg
 
 // 테이블 컬럼 정의
 const columns = [
-  { field: 'user_idx', headerName: 'user_idx', width: 80 },
+  { field: 'user_idx', headerName: '번호', width: 80 },
   { field: 'user_id', headerName: '아이디', width: 190 },
   { field: 'user_name', headerName: '이름', width: 160 },
   { field: 'user_nickname', headerName: '닉네임', width: 170 },
   { field: 'user_email', headerName: '이메일', width: 330 },
   { field: 'user_reg_date', headerName: '최초 가입일', width: 200 },
-  { field: 'user_level_idx', headerName: '등급', width: 180 },
+  { field: 'user_level_desc', headerName: '등급', width: 180 },
 ];
 
 // 각 컬럼을 중앙 정렬
@@ -86,14 +86,14 @@ export default function DataTable() {
   const fetchUsers = async () => {
     setLoading(true);  // 로딩 시작
     try {
-      // 검색 카테고리와 검색어를 쿼리 파라미터로 전달
-      const response = await fetch(`http://localhost:8080/api/user_info/list?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
+      // 새로운 URL을 사용하여 API 호출
+      const response = await fetch(`http://localhost:8080/api/user_info/list/level/not1?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
       const data = await response.json();
-
+  
+      console.log('API Response:', data); // 응답 내용 로그 추가
+  
       if (data.success) {
-        // user_level_idx가 2인 데이터만 필터링
-        const filteredUsers = data.data.filter(user => user.user_level_idx === 2);
-        setUsers(filteredUsers);  // 필터링된 데이터만 상태에 저장
+        setUsers(data.data);  // 반환된 데이터를 상태에 저장
       } else {
         setError("회원 목록을 불러오는 데 실패했습니다.");
       }
@@ -103,6 +103,7 @@ export default function DataTable() {
     }
     setLoading(false);  // 로딩 종료
   };
+  
 
   // 초기 데이터 로딩
   useEffect(() => {
@@ -116,7 +117,7 @@ export default function DataTable() {
 
   return (
     <div className={adcommons.adcommons__container}>
-      <h1 className={adcommons.adcommons__title}>일반 회원 관리</h1>
+      <h1 className={adcommons.adcommons__title}>전문 회원 관리</h1>
 
       <div className={styles.ad201__search}>
         <SearchBar

@@ -1,34 +1,28 @@
-'use client';
-
-import * as React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
-import adcommons from "../styles/adcommons.module.css";
 import Stack from '@mui/material/Stack';
-import styles from '../styles/ad601.module.css'
+import Pagination from '@mui/material/Pagination';
 import { Button } from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import adcommons from "../styles/adcommons.module.css";
+import styles from '../styles/ad601.module.css';
+import axios from 'axios';
 
-// 검색창 컴포넌트
-function SearchBar() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-
+function SearchBar({ searchQuery, setSearchQuery, handleSearch }) {
   return (
     <div className={adcommons.adcommons__searchcontainer}>
-      {/* 검색 옵션 */}
-      <div className={adcommons.adcommons__searchdropdown}>
-        <select className={adcommons.adcommons__category} defaultValue="아이디">
-          <option value="아이디">약국명으로 검색</option>
-          <option value="이름">제조사명</option>
-        </select>
-      </div>
-
       {/* 검색바 */}
       <div className={adcommons.adcommons__searchbar}>
-        <input type="text" placeholder="검색어를 입력하세요." value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)} />
-        <button type="button" >
+        <input
+          type="text"
+          placeholder="검색어를 입력하세요."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button type="button" onClick={handleSearch}>
           <span className="material-symbols-outlined">search</span>
         </button>
       </div>
@@ -36,124 +30,150 @@ function SearchBar() {
   );
 }
 
-const columns = [
-  { field: 'id', headerName: 'DB확정나면수정', width: 207 },
-  { field: 'Name', headerName: 'DB확정나면수정', width: 207 },
-  { field: 'email', headerName: 'DB확정나면수정', width: 400 },
-  { field: 'regdate', headerName: 'DB확정나면수정', width: 207 },
-  { field: 'level', headerName: 'DB확정나면수정', width: 207 },
-];
-
-const rows = [
-  { id: 'hong', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'park', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'kim', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'lee', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'yoon', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'sdkw', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'asdf', Name: 'Clifford', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'sadeee', Name: 'Frances', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'hhhg', Name: 'Roxie', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'hosdfng', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'sdrkfs', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'sdewr', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'zcgh', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'qhjm', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-  { id: 'ssgjt', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-];
-
-// 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
-const centeredColumns = columns.map(column => ({
-  ...column,
-  headerAlign: 'center'
-}));
-
 export default function DataTable() {
-  const [page, setPage] = React.useState(1);
-  const [selectedRows, setSelectedRows] = React.useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태
+  const [rows, setRows] = useState([]); // 서버에서 가져온 데이터 상태
+  const [filteredRows, setFilteredRows] = useState([]); // 필터링된 데이터 상태
+  const [page, setPage] = useState(1);
+  const [selectedRows, setSelectedRows] = useState([]);
   const rowsPerPage = 5;
+  const router = useRouter();
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/phar_info/list');
+      console.log("서버에서 가져온 데이터:", response.data);
+
+      if (response.data && Array.isArray(response.data.data)) {
+        setRows(response.data.data);
+      }
+    } catch (error) {
+      console.log("데이터를 가져오지 못했습니다", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // 페이지 로드 시 필터링되지 않은 모든 데이터로 초기화
+    setFilteredRows(rows);
+  }, [rows]);
+
+  const isDeleteButtonDisabled = selectedRows.length === 0; // 선택된 항목 없으면 삭제 버튼 비활성화
+
+  // 검색어에 맞는 데이터 필터링
+  const handleSearch = () => {
+    console.log("검색어:", searchQuery); // 검색어 출력
+    const filtered = rows.filter(row => {
+      const pharNameMatch = row.phar_name.toLowerCase().includes(searchQuery.toLowerCase());
+      const pharAddressMatch = row.phar_address.toLowerCase().includes(searchQuery.toLowerCase());
+
+      if (pharNameMatch || pharAddressMatch) {
+        console.log("일치하는 항목:", row); // 일치하는 항목 출력
+      }
+
+      return pharNameMatch || pharAddressMatch;
+    });
+
+    console.log("필터링된 데이터:", filtered); // 필터링된 데이터 출력
+    setFilteredRows(filtered); // 필터링된 데이터 상태 업데이트
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
   const handleSelectionChange = (newSelection) => {
-    setSelectedRows(newSelection.selectionModel); // 체크된 ID 목록 업데이트
+    setSelectedRows(newSelection.selectionModel);
+  };
+
+  // 데이터 행 클릭 시 상세보기 페이지로 이동
+  const handleRowClick = (params) => {
+    const { phar_idx } = params.row;
+    router.push(`/ad601detail?phar_idx=${phar_idx}`);
   };
 
   const startIndex = (page - 1) * rowsPerPage;
-  const currentRows = rows.slice(startIndex, startIndex + rowsPerPage);
-
-  const isDeleteButtonDisabled = selectedRows.length == 0; // 선택된 항목 없으면 삭제 버튼 비활성화
-
+  const currentRows = filteredRows.slice(startIndex, startIndex + rowsPerPage);
 
   return (
     <div className={adcommons.adcommons__container}>
       <h1 className={adcommons.adcommons__title}>약국 찾아보기</h1>
       <div className={styles.ad601__search}>
-        <SearchBar />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          handleSearch={handleSearch}
+        />
       </div>
-      <div className={adcommons.adcommons__table}>
-        <Paper sx={{ width: '100%' }}>
-          <div className={adcommons.adcommons__buttoncontainer}>
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{
-                backgroundColor: 'white',
-                color: '#9C27B0',
-                border: '1px solid #9C27B0',
-                borderRadius: '42px',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                }
-              }}
-              disabled={isDeleteButtonDisabled} // 삭제 버튼 활성화/비활성화
-            >
-              삭제하기
-            </Button>
 
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{
-                backgroundColor: 'white',
-                color: '#9C27B0',
-                border: '1px solid #9C27B0',
-                borderRadius: '42px',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                }
-              }}
-            >
-              추가하기
-            </Button>
-          </div>
-          <DataGrid
-            rows={currentRows}
-            columns={centeredColumns}
-            pageSize={rowsPerPage}
-            checkboxSelection
-            hideFooterPagination={true} // 페이지네이션 숨기기
-            hideFooter={true}
-            onSelectionModelChange={handleSelectionChange}  // 선택된 항목이 바뀔 때 호출
-            selectionModel={selectedRows}  // 선택된 행의 ID를 모델에 반영
+      <div className={adcommons.adcommons__buttoncontainer} style={{ marginTop: "25px" }}>
+        <Button
+          variant="outlined"
+          size="medium"
+          sx={{
+            backgroundColor: 'white',
+            color: '#9C27B0',
+            border: '1px solid #9C27B0',
+            borderRadius: '42px',
+            '&:hover': {
+              backgroundColor: 'secondary.main',
+              color: 'white',
+              border: '1px solid #9e9e9e',
+            },
+          }}
+          disabled={isDeleteButtonDisabled} // 삭제 버튼 활성화/비활성화
+        >
+          삭제하기
+        </Button>
+
+        <Link href="/ad601write" passHref>
+          <Button
+            variant="outlined"
+            size="medium"
             sx={{
-              // 셀의 텍스트를 가운데 정렬
-              '& .MuiDataGrid-cell': {
-                textAlign: 'center',
+              backgroundColor: 'white',
+              color: '#9C27B0',
+              border: '1px solid #9C27B0',
+              borderRadius: '42px',
+              '&:hover': {
+                backgroundColor: 'secondary.main',
+                color: 'white',
+                border: '1px solid #9e9e9e',
               },
             }}
+          >
+            추가하기
+          </Button>
+        </Link>
+      </div>
+
+      <div className={adcommons.adcommons__table}>
+        <Paper sx={{ width: '100%' }}>
+          <DataGrid
+           rows={currentRows}
+            columns={[
+              { field: 'phar_idx', headerName: 'ID', width: 150, align: 'center' },
+              { field: 'phar_name', headerName: '약국명', width: 200, align: 'center' },
+              { field: 'phar_address', headerName: '주소', width: 900, align: 'center' },
+            ]}
+            pageSize={rowsPerPage}
+            checkboxSelection
+            hideFooterPagination
+            hideFooter
+            scrollbarSize={0}
+            onSelectionModelChange={handleSelectionChange}
+            selectionModel={selectedRows}
+            onRowClick={handleRowClick}
+            getRowId={(row) => row.phar_idx} // 반드시 `phar_idx`를 고유 ID로 사용
           />
         </Paper>
       </div>
+
       <Stack spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
         <Pagination
-          count={Math.ceil(rows.length / rowsPerPage)} // 총 페이지 수 계산
+          count={Math.ceil(filteredRows.length / rowsPerPage)}
           page={page}
           onChange={handlePageChange}
           color="secondary"

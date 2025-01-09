@@ -42,13 +42,13 @@ function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCateg
 
 // 테이블 컬럼 정의
 const columns = [
-  { field: 'user_idx', headerName: 'user_idx', width: 80 },
+  { field: 'user_idx', headerName: '번호', width: 80 },
   { field: 'user_id', headerName: '아이디', width: 190 },
   { field: 'user_name', headerName: '이름', width: 160 },
   { field: 'user_nickname', headerName: '닉네임', width: 170 },
   { field: 'user_email', headerName: '이메일', width: 330 },
   { field: 'user_reg_date', headerName: '최초 가입일', width: 200 },
-  { field: 'user_level_idx', headerName: '등급', width: 180 },
+  { field: 'user_level_desc', headerName: '등급', width: 180 },
 ];
 
 // 각 컬럼을 중앙 정렬
@@ -87,7 +87,7 @@ export default function DataTable() {
     setLoading(true);  // 로딩 시작
     try {
       // 검색 카테고리와 검색어를 쿼리 파라미터로 전달
-      const response = await fetch(`http://localhost:8080/api/user_info/list?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
+      const response = await fetch(`http://localhost:8080/api/user_info/list/level/1?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
       const data = await response.json();
 
       if (data.success) {
@@ -127,9 +127,11 @@ export default function DataTable() {
         />
       </div>
 
-      {loading && <div>로딩 중...</div>} {/* 로딩 중 표시 */}
 
       {error && <div className="error-message">{`오류: ${error}`}</div>} {/* 에러 메시지 표시 */}
+
+      {/* 데이터가 없을 경우 표시 */}
+      {users.length === 0 && !loading && !error && <div>검색된 회원이 없습니다.</div>}
 
       <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
@@ -139,6 +141,7 @@ export default function DataTable() {
             pageSize={rowsPerPage}
             hideFooterPagination={true}
             hideFooter={true}
+            
             onRowClick={handleRowClick}
             getRowId={(row) => row.user_idx}
             sx={{

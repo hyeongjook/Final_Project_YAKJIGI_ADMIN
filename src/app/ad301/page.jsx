@@ -42,14 +42,14 @@ function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCateg
 
 // 테이블 컬럼 정의
 const columns = [
-  { field: 'admin_idx', headerName: 'admin_idx', width: 100 },
+  { field: 'admin_idx', headerName: '번호', width: 100 },
   { field: 'admin_id', headerName: '아이디', width: 150 },
   { field: 'admin_name', headerName: '이름', width: 140 },
   { field: 'admin_nickname', headerName: '닉네임', width: 150 },
   { field: 'admin_email', headerName: '이메일', width: 280 },
   { field: 'admin_phone', headerName: '전화번호', width: 200 },
-  { field: 'admin_out', headerName: '퇴직 여부', width: 150 },
-  { field: 'admin_level_idx', headerName: '등급', width: 150 },
+  { field: 'admin_out', headerName: '활동 여부', width: 150 },
+  { field: 'admin_level_desc', headerName: '등급', width: 150 },
 ];
 
 // 각 컬럼을 중앙 정렬
@@ -80,7 +80,7 @@ export default function DataTable() {
   // 데이터 행 클릭 시 상세보기 페이지로 이동
   const handleRowClick = (params) => {
     const { admin_idx } = params.row;
-    router.push(`/adminDetail?admin_idx=${admin_idx}`);
+    router.push(`/ad301detail?admin_idx=${admin_idx}`);  // URL을 '/ad301detail'로 수정
   };
 
   // 데이터를 백엔드에서 가져오는 함수
@@ -138,7 +138,7 @@ export default function DataTable() {
             pageSize={rowsPerPage}
             hideFooterPagination={true}
             hideFooter={true}
-            onRowClick={handleRowClick}
+            onRowClick={handleRowClick}  // 행 클릭 시 상세보기로 이동
             getRowId={(row) => row.admin_idx}
             sx={{
               border: 0,
