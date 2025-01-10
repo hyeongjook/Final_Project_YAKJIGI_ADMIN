@@ -141,7 +141,6 @@ export default function DataTable() {
             pageSize={rowsPerPage}
             hideFooterPagination={true}
             hideFooter={true}
-            checkboxSelection
             onRowClick={handleRowClick}
             getRowId={(row) => row.user_idx}
             sx={{

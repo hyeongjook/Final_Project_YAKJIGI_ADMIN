@@ -92,7 +92,7 @@ function Page() {
     formData.append('user_idx', user_idx); // 사용자 ID 추가
 
     try {
-      const response = await fetch('http://localhost:8080/api/user_info/upload_profile', {
+      const response = await fetch(`http://localhost:8080/api/user_info/uploadProfileImage/${user_idx}`, {
         method: 'POST',
         body: formData,
       });
