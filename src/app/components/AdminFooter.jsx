@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Adfooter = () => {
-    return <footer>Footer content</footer>;
+    return  <div className="admin-Footer">
+    © admin. All Rights Reserved.
+    </div>;
 };
 export default Adfooter;

@@ -46,9 +46,8 @@ const columns = [
   { field: 'admin_id', headerName: '아이디', width: 150 },
   { field: 'admin_name', headerName: '이름', width: 140 },
   { field: 'admin_nickname', headerName: '닉네임', width: 150 },
-  { field: 'admin_email', headerName: '이메일', width: 280 },
+  { field: 'admin_email', headerName: '이메일', width: 300 },
   { field: 'admin_phone', headerName: '전화번호', width: 200 },
-  { field: 'admin_out', headerName: '활동 여부', width: 150 },
   { field: 'admin_level_desc', headerName: '등급', width: 150 },
 ];
 

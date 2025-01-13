@@ -19,7 +19,7 @@ function SearchBar() {
         {/* 검색 옵션 */}
         <div className={adcommons.adcommons__searchdropdown}>
           <select className={adcommons.adcommons__category} defaultValue="아이디">
-            <option value="아이디">약품명</option>
+            <option value="">약품명</option>
             <option value="이름">제조사명</option>
           </select>
         </div>
@@ -37,29 +37,12 @@ function SearchBar() {
   }
   
   const columns = [
-    { field: 'id', headerName: 'DB확정나면수정', width: 207 },
-    { field: 'Name', headerName: 'DB확정나면수정', width: 207 },
-    { field: 'email', headerName: 'DB확정나면수정', width: 400 },
-    { field: 'regdate', headerName: 'DB확정나면수정', width: 207 },
-    { field: 'level', headerName: 'DB확정나면수정', width: 207 },
+    { field: 'box_address_city', headerName: '시 / 도', width: 207 },
+    { field: 'box_address_town', headerName: '구 / 군', width: 207 },
+    { field: 'box_address', headerName: '주소', width: 400 },
   ];
   
   const rows = [
-    { id: 'hong', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'park', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'kim', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'lee', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'yoon', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'sdkw', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'asdf', Name: 'Clifford', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'sadeee', Name: 'Frances', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'hhhg', Name: 'Roxie', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'hosdfng', Name: 'Snow', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'sdrkfs', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'sdewr', Name: 'Lannister', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'zcgh', Name: 'Stark', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'qhjm', Name: 'Targaryen', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
-    { id: 'ssgjt', Name: 'Melisandre', email: 'hong@naver.com', regdate: '2000.00.00', level: '일반' },
   ];
 
    // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
@@ -135,7 +118,6 @@ function SearchBar() {
             rows={currentRows}
             columns={centeredColumns}
             pageSize={rowsPerPage}
-            checkboxSelection
             hideFooterPagination={true} // 페이지네이션 숨기기
             hideFooter={true}
             onSelectionModelChange={handleSelectionChange}  // 선택된 항목이 바뀔 때 호출

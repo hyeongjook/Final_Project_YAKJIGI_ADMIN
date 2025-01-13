@@ -14,15 +14,20 @@ body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.admin-homepage{
-cursor: pointer;
-display: flex;
-align-items: center;
+.admin-homepage {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
-.admin-user span{
+.menu-Home {
+  padding : 10px;
+}
+
+.admin-user span {
   font-size: 20px;
   margin-right: 6px;
 }
+
 .admin-user {
   max-width: 1320px;
   color: #555555;
@@ -47,7 +52,8 @@ align-items: center;
 
 .admin-Header {
   max-width: 1920px;
-  width: 100%
+  width: 100%;
+  place-self: center;
 }
 
 .menubar-color {
@@ -133,7 +139,7 @@ li {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  min-width: 200px;
+  min-width: 220px;
   z-index: 1000;
   left: 100%;
   top: 0;
@@ -157,4 +163,19 @@ li {
   background-color: #E0C3ED;
   color: #fff;
   transition: all 0.3s;
+}
+
+.admin-Footer{
+  width: 100%;
+  text-align: center;
+  height: 60px;
+  background-color: #7b7b7b;
+  font-size: 14px;
+  color: #fff;
+}
+
+.menu-home-image {
+  width: 200px; /* 원하는 너비 */
+  height: 200px; /* 원하는 높이 */
+  object-fit: contain; /* 이미지 비율 유지하며 크기 조정 */
 }

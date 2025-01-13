@@ -40,7 +40,7 @@ function SearchBar() {
 }
 
 const columns = [
-  { field: 'id', headerName: 'idx', width: 207 },
+  { field: 'id', headerName: '번호', width: 207 },
   { field: 'Name', headerName: '작성자 이름', width: 207 },
   { field: 'title', headerName: '제목', width: 400 },
   { field: 'regdate', headerName: '작성일', width: 207 },
@@ -48,20 +48,15 @@ const columns = [
 ];
 
 const initialRows = [
-  { id: 1, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 2, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 3, Name: 'Stark', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 4, Name: 'Targaryen', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 5, Name: 'Melisandre', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 6, Name: 'Clifford', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 7, Name: 'Frances', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 8, Name: 'Roxie', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
-  { id: 9, Name: 'Snow', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 10, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 11, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 12, Name: 'Stark', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 13, Name: 'Targaryen', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
-  { id: 14, Name: 'Melisandre', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
+  { id: 9, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
+  { id: 8, Name: 'Stark', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
+  { id: 7, Name: 'Targaryen', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
+  { id: 6, Name: 'Melisandre', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
+  { id: 5, Name: 'Clifford', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
+  { id: 4, Name: 'Frances', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
+  { id: 3, Name: 'Roxie', title: '제목입니다', regdate: '2000.00.00', answer: 'o' },
+  { id: 2, Name: 'Snow', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
+  { id: 1, Name: 'Lannister', title: '제목입니다', regdate: '2000.00.00', answer: 'x' },
 ];
 
 // 모든 컬럼에 대해 `headerAlign: 'center'`를 동적으로 추가
@@ -108,7 +103,7 @@ export default function DataTable() {
       <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
           <div className={adcommons.adcommons__buttoncontainer}>
-            <Button
+       {/*      <Button
               variant="outlined"
               size="medium"
               sx={{
@@ -122,34 +117,17 @@ export default function DataTable() {
                   border: '1px solid #9e9e9e',
                 },
               }}
-              onClick={handleDelete} // 삭제 버튼 클릭 시 handleDelete 호출
+              onClick={handleDelete} 
             >
               삭제하기
-            </Button>
+            </Button> */}
 
-            <Button
-              variant="outlined"
-              size="medium"
-              sx={{
-                backgroundColor: 'white',
-                color: '#9C27B0',
-                border: '1px solid #9C27B0',
-                borderRadius: '42px',
-                '&:hover': {
-                  backgroundColor: 'secondary.main',
-                  color: 'white',
-                  border: '1px solid #9e9e9e',
-                },
-              }}
-            >
-              추가하기
-            </Button>
+            
           </div>
           <DataGrid
             rows={currentRows}
             columns={centeredColumns}
             pageSize={rowsPerPage}
-            checkboxSelection
             hideFooterPagination={true} // 페이지네이션 숨기기
             hideFooter={true}
             onSelectionModelChange={handleSelectionChange} // 선택된 항목이 바뀔 때 호출

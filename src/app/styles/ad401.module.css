@@ -2,3 +2,7 @@
 /* Material Icons 및 Outlined 스타일을 @import로 추가 */
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+.ad401__center{    
+justify-self: center;
+}

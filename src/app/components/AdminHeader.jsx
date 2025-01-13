@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import "../globals.css";
+import Image from "next/image";
 
 function Page() {
     // 각 메뉴의 상태를 관리하는 객체 형태
@@ -58,7 +59,9 @@ function Page() {
             <div className="menubar-color">
                 <div className="menubar">
                     <ul>
-                        <li className="menu-Home"><Link href={"/"}>HOME</Link></li>
+                    <li className="menu-Home"><Link href={"/"}>
+                    <Image src="/images/YAKJIGI.png" width={200} height={200} alt="약지기"/></Link>
+                    </li>
                         <div className="li-list">
                             <li className="menu-options">대쉬보드</li>
                             {/* 사용자 관리 */}
@@ -173,7 +176,7 @@ function Page() {
                                             {hoverMenu.pageManagementSub3 && (
                                                 <ul className="dropdown-right">
                                                     <li className="dropdown-item-right"><Link href="/ad601">약국 찾아보기</Link></li>
-                                                    <li className="dropdown-item-right" style={{ fontSize: "12px" }}><Link href="/ad602">폐의약품 수거함 찾아보기</Link></li>
+                                                    <li className="dropdown-item-right"><Link href="/ad602">폐의약품 수거함 찾아보기</Link></li>
                                                     <li className="dropdown-item-right"><Link href="/ad603">보도자료 찾아보기</Link></li>
                                                 </ul>
                                             )}

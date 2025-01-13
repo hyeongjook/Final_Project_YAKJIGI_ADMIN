@@ -10,7 +10,13 @@ import styles from '../styles/ad201.module.css';
 import adcommons from '../styles/adcommons.module.css';
 
 // 검색 바 컴포넌트
-function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCategory }) {
+function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCategory, onSearch }) {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onSearch(); // Enter 키로 검색 실행
+    }
+  };
+
   return (
     <div className={adcommons.adcommons__searchcontainer}>
       <div className={adcommons.adcommons__searchdropdown}>
@@ -31,8 +37,9 @@ function SearchBar({ searchQuery, setSearchQuery, searchCategory, setSearchCateg
           placeholder="검색어를 입력하세요."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown} // Enter 키 눌렀을 때 검색
         />
-        <button type="button">
+        <button type="button" onClick={onSearch}> {/* 버튼 클릭 시 검색 */}
           <span className="material-symbols-outlined">search</span>
         </button>
       </div>
@@ -60,10 +67,11 @@ const centeredColumns = columns.map((column) => ({
 export default function DataTable() {
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchCategory, setSearchCategory] = useState("user_id");  // 검색 카테고리 추가
-  const [loading, setLoading] = useState(false); // 로딩 상태 추가
-  const [error, setError] = useState(null); // 에러 상태 추가
+  const [filteredUsers, setFilteredUsers] = useState([]); // 필터링된 사용자 목록
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어
+  const [searchCategory, setSearchCategory] = useState("user_id"); // 검색 카테고리
+  const [loading, setLoading] = useState(false); // 로딩 상태
+  const [error, setError] = useState(null); // 에러 상태
   const rowsPerPage = 5;
   const router = useRouter();
 
@@ -74,7 +82,7 @@ export default function DataTable() {
 
   // 페이지에 맞는 데이터 계산
   const startIndex = (page - 1) * rowsPerPage;
-  const currentRows = users.slice(startIndex, startIndex + rowsPerPage);
+  const currentRows = filteredUsers.slice(startIndex, startIndex + rowsPerPage);
 
   // 데이터 행 클릭 시 상세보기 페이지로 이동
   const handleRowClick = (params) => {
@@ -82,36 +90,61 @@ export default function DataTable() {
     router.push(`/ad201detail?user_idx=${user_idx}`);
   };
 
-  // 데이터를 백엔드에서 가져오는 함수
+  // 검색 실행 함수
+  const onSearch = () => {
+    filterUsers();
+  };
+
+  // 모든 사용자 데이터를 가져오는 함수
   const fetchUsers = async () => {
-    setLoading(true);  // 로딩 시작
+    setLoading(true); // 로딩 시작
     try {
-      // 검색 카테고리와 검색어를 쿼리 파라미터로 전달
-      const response = await fetch(`http://localhost:8080/api/user_info/list/level/1?searchQuery=${searchQuery}&searchCategory=${searchCategory}`);
+      const response = await fetch(`http://localhost:8080/api/user_info/list/level/1`);
       const data = await response.json();
 
       if (data.success) {
         // user_level_idx가 1인 데이터만 필터링
-        const filteredUsers = data.data.filter(user => user.user_level_idx === 1);
-        setUsers(filteredUsers);  // 필터링된 데이터만 상태에 저장
+        const allUsers = data.data.filter(user => user.user_level_idx === 1);
+        setUsers(allUsers);
+        setFilteredUsers(allUsers); // 전체 데이터를 필터링된 데이터로 설정
       } else {
         setError("회원 목록을 불러오는 데 실패했습니다.");
       }
     } catch (error) {
       setError("데이터를 가져오는 중 오류가 발생했습니다.");
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     }
-    setLoading(false);  // 로딩 종료
+    setLoading(false); // 로딩 종료
+  };
+
+  // 검색어 및 카테고리에 맞는 사용자 목록 필터링 함수
+  const filterUsers = () => {
+    let filtered = users;
+
+    if (searchQuery) {
+      filtered = users.filter((user) => {
+        if (searchCategory === "user_id") {
+          return user.user_id.includes(searchQuery);
+        } else if (searchCategory === "user_name") {
+          return user.user_name.includes(searchQuery);
+        } else if (searchCategory === "user_email") {
+          return user.user_email.includes(searchQuery);
+        }
+        return true;
+      });
+    }
+
+    setFilteredUsers(filtered); // 필터링된 데이터를 상태에 저장
   };
 
   // 초기 데이터 로딩
   useEffect(() => {
-    fetchUsers();  // 사용자 데이터를 불러옵니다.
-  }, [searchQuery, searchCategory]);  // 검색어와 카테고리 변경 시 데이터 새로 가져오기
+    fetchUsers();
+  }, []);
 
   // 검색어 변경 시 페이지 리셋
   useEffect(() => {
-    setPage(1);
+    setPage(1);  // 검색 시 페이지를 1로 리셋
   }, [searchQuery, searchCategory]);
 
   return (
@@ -124,14 +157,14 @@ export default function DataTable() {
           setSearchQuery={setSearchQuery}
           searchCategory={searchCategory}
           setSearchCategory={setSearchCategory}
+          onSearch={onSearch} // 검색 함수 전달
         />
       </div>
-
 
       {error && <div className="error-message">{`오류: ${error}`}</div>} {/* 에러 메시지 표시 */}
 
       {/* 데이터가 없을 경우 표시 */}
-      {users.length === 0 && !loading && !error && <div>검색된 회원이 없습니다.</div>}
+      {filteredUsers.length === 0 && !loading && !error && <div>검색된 회원이 없습니다.</div>}
 
       <div className={adcommons.adcommons__table}>
         <Paper sx={{ width: '100%' }}>
@@ -158,7 +191,7 @@ export default function DataTable() {
 
       <Stack spacing={2} alignItems="center" sx={{ marginTop: 2 }}>
         <Pagination
-          count={Math.ceil(users.length / rowsPerPage)}
+          count={Math.ceil(filteredUsers.length / rowsPerPage)}
           page={page}
           onChange={handlePageChange}
           color="secondary"
